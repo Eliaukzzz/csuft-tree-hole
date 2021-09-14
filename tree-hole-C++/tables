@@ -1,0 +1,30 @@
+mysql> create table User(
+    -> Id varchar(30) not null primary key,
+    -> Name varchar(30) not null,
+    -> Email varchar(30) not null,
+    -> Password varchar(30) not null,
+    -> Avater longblob
+    -> );
+Query OK, 0 rows affected (0.16 sec)
+
+mysql> create table Message(
+    -> Message_Id varchar(30) not null primary key,
+    -> Id varchar(30) references User(Id),
+    -> Avater longblob references User(Avater),
+    -> content varchar(1000) not null,
+    -> Time Datetime not null,
+    -> Reply_Message varchar(30),
+    -> Replies varchar(30)
+    -> );
+Query OK, 0 rows affected (0.09 sec)
+
+mysql> show tables;
++-------------------+
+| Tables_in_firstdb |
++-------------------+
+| Message           |
+| User              |
+| conversation      |
+| student           |
++-------------------+
+4 rows in set (0.20 sec)
