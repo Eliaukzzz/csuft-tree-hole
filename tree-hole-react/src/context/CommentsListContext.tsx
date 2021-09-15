@@ -1,8 +1,8 @@
 import React, { ReactNode, useEffect, useState } from "react";
+import { apiUrl } from "../utils/apiUrl";
 import { processList } from "../utils/processList";
 import { UserProps } from "./UserContext";
 
-const apiUrl = "http://localhost:3001/comment";
 // 留言和留言评论的类型定义
 export interface CommentProp {
   id: number;
@@ -49,7 +49,7 @@ export const CommentListProvider = ({ children }: { children: ReactNode }) => {
 
   // 获取树洞留言列表
   const getCommentsList = () => {
-    fetch(apiUrl)
+    fetch(`${apiUrl}comment`)
       .then(async (response) => {
         // 请求成功
         if (response.ok) {
@@ -79,7 +79,7 @@ export const CommentListProvider = ({ children }: { children: ReactNode }) => {
   };
   // 发布新的树洞留言
   const createNewComment = (newComment: NewCommentProp) => {
-    fetch(apiUrl, {
+    fetch(`${apiUrl}comment`, {
       method: "POST",
       headers: {
         // 类型为json
