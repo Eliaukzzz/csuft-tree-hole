@@ -5,7 +5,13 @@ import {
 } from "../../context/CommentsListContext";
 
 // 发布留言与回复 文本框组件
-export const CommentBox = ({ children }: { children: ReactNode }) => {
+export const CommentBox = ({
+  children,
+  isTopCommentBox = false,
+}: {
+  children: ReactNode;
+  isTopCommentBox?: boolean;
+}) => {
   // 留言与回复框受控组件
   const [newComment, setNewComment] = useState("");
   const { createNewComment } = useCommentsList();
@@ -31,7 +37,9 @@ export const CommentBox = ({ children }: { children: ReactNode }) => {
   return (
     <form
       action=""
-      className="grid pt-3 px-3 bg-gary-theme-gary"
+      className={
+        isTopCommentBox ? "grid px-3 bg-gary-theme-gary" : "grid px-3 "
+      }
       onSubmit={(event) => pushNewComment(event)}
     >
       <textarea
@@ -47,7 +55,7 @@ export const CommentBox = ({ children }: { children: ReactNode }) => {
         name="comment"
         id=""
         placeholder="在树洞里宣泄你的情感，留下你的吐槽吧"
-        className="bg-gray-50 p-2 rounded"
+        className="bg-gray-50 mt-3 p-2 rounded border-2 border-gary-theme-gary"
       ></textarea>
       <fieldset className="py-4">
         <button

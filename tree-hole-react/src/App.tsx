@@ -2,6 +2,7 @@ import React from "react";
 import { CommentBox } from "./components/CommentBox";
 import { CommentItem } from "./components/CommentItem";
 import { CommentReplyBox } from "./components/CommentReplyBox";
+import { Header } from "./components/Header";
 import { Loading } from "./components/Loading";
 import { ReplyCommentContainer } from "./components/ReplyCommentContainer";
 import { useCommentsList } from "./context/CommentsListContext";
@@ -19,12 +20,9 @@ function App() {
       <main className="p-4 bg-gray-50 min-h-screen">
         <div className="max-w-screen-xl mx-auto min-h-main-h bg-white rounded-lg shadow-2xl">
           {/* 导航栏 */}
-          <div className="flex text-3xl py-6 px-5 bg-gary-theme-gary text-white">
-            <i className="iconfont text-3xl">&#xe6e5;</i>
-            <h2 className="ml-5">林科大树洞</h2>
-          </div>
+          <Header />
           {/* 输入框 */}
-          <CommentBox children="" />
+          <CommentBox children="" isTopCommentBox={true} />
           {/* 分割线 */}
           <div className="custom-shape-divider-top-1631711424">
             <svg
@@ -57,6 +55,17 @@ function App() {
               );
             })}
           </div>
+          <svg
+            className="animate-bounce w-6 h-6 text-amber-900 mx-auto"
+            fill="none"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            strokeWidth="2"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
+          >
+            <path d="M19 14l-7 7m0 0l-7-7m7 7V3"></path>
+          </svg>
         </div>
       </main>
     </div>

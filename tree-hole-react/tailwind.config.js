@@ -8,6 +8,7 @@ module.exports = {
       },
       minWidth: {
         "main-w": "94vw",
+        "sidebar-w": "70vw",
       },
       spacing: {
         "main-p": "2vh",
@@ -19,6 +20,9 @@ module.exports = {
         green: {
           "theme-green": "#8BB7A2",
         },
+      },
+      transitionProperty: {
+        h: "height",
       },
     },
   },
