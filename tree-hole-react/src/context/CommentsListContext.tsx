@@ -1,5 +1,6 @@
-import React, { ReactNode, useEffect, useState } from "react";
+import React, { ReactNode, useContext, useEffect, useState } from "react";
 import { apiUrl } from "../utils/apiUrl";
+import { useLoad } from "./Load";
 import { UserProps } from "./UserContext";
 
 // 留言和留言评论的类型定义
@@ -37,14 +38,19 @@ export const CommentListProvider = ({ children }: { children: ReactNode }) => {
   // 定义一个state属性用于存评论列表
   const [commentsList, setCommentsList] = useState<null | CommentProp[]>(null);
 
+  // 从LoadProvider中取出isLoading判断是否在加载
+  const { isLoading, setIsLoading } = useLoad();
   // 获取树洞留言列表
   const getCommentsList = () => {
+    setIsLoading(true);
     fetch(`${apiUrl}comment`)
       .then(async (response) => {
         // 请求成功
         if (response.ok) {
           // 获取树洞留言列表
-          setCommentsList((await response.json()) as CommentProp[]);
+          const list: CommentProp[] = await response.json();
+          setIsLoading(false);
+          setCommentsList(list);
           return Promise.resolve(response.statusText);
         } else {
           return Promise.reject(response.status);
@@ -56,6 +62,7 @@ export const CommentListProvider = ({ children }: { children: ReactNode }) => {
   };
   // 发布新的树洞留言
   const createNewComment = (newComment: NewCommentProp) => {
+    setIsLoading(true);
     fetch(`${apiUrl}comment`, {
       method: "POST",
       headers: {
@@ -91,9 +98,9 @@ export const CommentListProvider = ({ children }: { children: ReactNode }) => {
 };
 
 export const useCommentsList = () => {
-  const context = React.useContext(CommentsListContext);
+  const context = useContext(CommentsListContext);
   if (!context) {
-    throw new Error("useAuth必须在CommentsListProvider中使用");
+    throw new Error("useCommentsList必须在CommentsListProvider中使用");
   }
   return context;
 };

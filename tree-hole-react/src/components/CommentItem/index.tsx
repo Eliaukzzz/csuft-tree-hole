@@ -1,5 +1,5 @@
 import React from "react";
-import { CommentProp } from "../context/CommentsListContext";
+import { CommentProp } from "../../context/CommentsListContext";
 
 // 树洞留言和留言回复内容组件
 export const CommentItem = ({ comment }: { comment: CommentProp }) => {

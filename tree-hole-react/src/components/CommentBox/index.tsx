@@ -2,7 +2,7 @@ import React, { ReactNode, useState } from "react";
 import {
   NewCommentProp,
   useCommentsList,
-} from "../context/CommentsListContext";
+} from "../../context/CommentsListContext";
 
 // 发布留言与回复 文本框组件
 export const CommentBox = ({ children }: { children: ReactNode }) => {

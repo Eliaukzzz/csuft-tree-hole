@@ -2,20 +2,28 @@ import React from "react";
 import { CommentBox } from "./components/CommentBox";
 import { CommentItem } from "./components/CommentItem";
 import { CommentReplyBox } from "./components/CommentReplyBox";
+import { Loading } from "./components/Loading";
 import { ReplyCommentContainer } from "./components/ReplyCommentContainer";
 import { useCommentsList } from "./context/CommentsListContext";
+import { useLoad } from "./context/Load";
 
 function App() {
   // 从CommentsListProvider中获得留言列表
   const { commentsList } = useCommentsList();
+  // 从LoadProvider中获取isLoading
+  const { isLoading } = useLoad();
   return (
     <div className="App">
+      {/* loading组件 */}
+      {isLoading ? <Loading /> : null}
       <main className="p-4 bg-gray-50 min-h-screen">
-        <div className="max-w-screen-xl mx-auto bg-white rounded-lg shadow-2xl">
+        <div className="max-w-screen-xl mx-auto min-h-main-h bg-white rounded-lg shadow-2xl">
+          {/* 导航栏 */}
           <div className="flex text-3xl py-6 px-5 bg-gary-theme-gary text-white">
             <i className="iconfont text-3xl">&#xe6e5;</i>
             <h2 className="ml-5">林科大树洞</h2>
           </div>
+          {/* 输入框 */}
           <CommentBox children="" />
           {/* 分割线 */}
           <div className="custom-shape-divider-top-1631711424">
@@ -49,8 +57,6 @@ function App() {
               );
             })}
           </div>
-
-          {/* 顶级留言1 */}
         </div>
       </main>
     </div>

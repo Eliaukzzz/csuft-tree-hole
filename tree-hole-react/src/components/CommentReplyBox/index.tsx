@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { CommentBox } from "./CommentBox";
+import { CommentBox } from "../CommentBox";
 
 // 回复树洞留言盒子组件
 export const CommentReplyBox = () => {
