@@ -7,12 +7,12 @@ export const CommentItem = ({ comment }: { comment: CommentProp }) => {
     <div>
       <div className="flex">
         <img
-          src={comment.user.avatar}
+          src={comment.poster.avatar}
           alt=""
           className="w-12 h-12 mr-4 rounded-full"
         />
         <div>
-          <p>{comment.user.nickname}</p>
+          <p>{comment.poster.nickname}</p>
           <p className="text-gray-600 text-sm">{comment.time}</p>
         </div>
         <span className="ml-auto">

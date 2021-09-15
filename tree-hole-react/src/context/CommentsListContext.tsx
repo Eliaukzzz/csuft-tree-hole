@@ -1,29 +1,19 @@
 import React, { ReactNode, useEffect, useState } from "react";
 import { apiUrl } from "../utils/apiUrl";
-import { processList } from "../utils/processList";
 import { UserProps } from "./UserContext";
 
 // 留言和留言评论的类型定义
 export interface CommentProp {
   id: number;
-  user: UserProps;
+  poster: UserProps;
   content: string;
   replyTo: null | number;
   time: string;
   replies: null | CommentProp[];
 }
-// 留言和留言评论的原始类型定义
-export interface OriginCommentProp {
-  id: number;
-  user: UserProps;
-  content: string;
-  replyTo: null | number;
-  time: string;
-  replies: null | number[];
-}
 // 新留言和新留言评论类型定义
 export interface NewCommentProp {
-  user: UserProps;
+  poster: UserProps;
   content: string;
   replyTo: null | number;
   time: string;
@@ -54,20 +44,7 @@ export const CommentListProvider = ({ children }: { children: ReactNode }) => {
         // 请求成功
         if (response.ok) {
           // 获取树洞留言列表
-          const originList: OriginCommentProp[] = await response.json();
-          const commentList = processList(
-            originList.filter((comment) => {
-              if (!comment.replyTo) {
-                return comment;
-              }
-            }),
-            originList.filter((reply) => {
-              if (reply.replyTo) {
-                return reply;
-              }
-            })
-          );
-          setCommentsList(commentList);
+          setCommentsList((await response.json()) as CommentProp[]);
           return Promise.resolve(response.statusText);
         } else {
           return Promise.reject(response.status);

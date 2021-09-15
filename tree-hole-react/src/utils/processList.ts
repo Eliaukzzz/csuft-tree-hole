@@ -27,5 +27,6 @@ export const processList = (
       };
     }
   });
+  console.log(JSON.stringify(commentsList));
   return commentsList;
 };

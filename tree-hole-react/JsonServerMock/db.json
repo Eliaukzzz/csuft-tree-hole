@@ -1,42 +1,22 @@
 {
-  "user": [
-    {
-      "id": 1,
+  "user": [{
+    "id": 1,
+    "nickname": "苍术",
+    "email": "2421398452@qq.com",
+    "password": "123456",
+    "avatar": "https://z3.ax1x.com/2021/09/05/hReKSA.jpg",
+    "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6IjI0MjEzOTg0NTJAcXEuY29tIiwicGFzc3dvcmQiOiIxMjM0NTYifQ.WOqAshEJnXX7clWA8HU0EAhOHCfVqSL15SbYHGYIycA"
+  }],
+  "comment": [{
+    "poster": {
       "nickname": "苍术",
-      "email": "2421398452@qq.com",
-      "password": "123456",
-      "avatar": "https://z3.ax1x.com/2021/09/05/hReKSA.jpg",
-      "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6IjI0MjEzOTg0NTJAcXEuY29tIiwicGFzc3dvcmQiOiIxMjM0NTYifQ.WOqAshEJnXX7clWA8HU0EAhOHCfVqSL15SbYHGYIycA"
-    }
-  ],
-  "comment": [
-    {
-      "user": {
-        "nickname": "苍术",
-        "avatar": "https://z3.ax1x.com/2021/09/05/hReKSA.jpg"
-      },
-      "content": "林科大树洞测试mock顶层留言1",
-      "replyTo": null,
-      "time": "6天前",
-      "replies": [
-        3,
-        4
-      ],
-      "id": 1
+      "avatar": "https://z3.ax1x.com/2021/09/05/hReKSA.jpg"
     },
-    {
-      "user": {
-        "nickname": "苍术",
-        "avatar": "https://z3.ax1x.com/2021/09/05/hReKSA.jpg"
-      },
-      "content": "林科大树洞测试mock顶层留言2",
-      "replyTo": null,
-      "time": "6天前",
-      "replies": null,
-      "id": 2
-    },
-    {
-      "user": {
+    "content": "林科大树洞测试mock顶层留言1",
+    "replyTo": null,
+    "time": "6天前",
+    "replies": [{
+      "poster": {
         "nickname": "苍术",
         "avatar": "https://z3.ax1x.com/2021/09/05/hReKSA.jpg"
       },
@@ -45,9 +25,8 @@
       "time": "6天前",
       "replies": null,
       "id": 3
-    },
-    {
-      "user": {
+    }, {
+      "poster": {
         "nickname": "苍术",
         "avatar": "https://z3.ax1x.com/2021/09/05/hReKSA.jpg"
       },
@@ -56,16 +35,27 @@
       "time": "6天前",
       "replies": null,
       "id": 4
+    }],
+    "id": 1
+  }, {
+    "poster": {
+      "nickname": "苍术",
+      "avatar": "https://z3.ax1x.com/2021/09/05/hReKSA.jpg"
     },
-    {
-      "user": {
-        "nickname": "苍术",
-        "avatar": "https://z3.ax1x.com/2021/09/05/hReKSA.jpg"
-      },
-      "content": "ok？",
-      "replyTo": null,
-      "time": "刚刚",
-      "id": 5
-    }
-  ]
+    "content": "林科大树洞测试mock顶层留言2",
+    "replyTo": null,
+    "time": "6天前",
+    "replies": [],
+    "id": 2
+  }, {
+    "poster": {
+      "nickname": "苍术",
+      "avatar": "https://z3.ax1x.com/2021/09/05/hReKSA.jpg"
+    },
+    "content": "ok？",
+    "replyTo": null,
+    "time": "刚刚",
+    "id": 5,
+    "replies": []
+  }]
 }

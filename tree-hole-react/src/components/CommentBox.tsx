@@ -17,7 +17,7 @@ export const CommentBox = ({ children }: { children: ReactNode }) => {
   ) => {
     event.preventDefault();
     const mockData: NewCommentProp = {
-      user: {
+      poster: {
         nickname: "苍术",
         avatar: "https://z3.ax1x.com/2021/09/05/hReKSA.jpg",
       },
@@ -31,7 +31,7 @@ export const CommentBox = ({ children }: { children: ReactNode }) => {
   return (
     <form
       action=""
-      className="grid"
+      className="grid pt-3 px-3 bg-gary-theme-gary"
       onSubmit={(event) => pushNewComment(event)}
     >
       <textarea
@@ -52,7 +52,7 @@ export const CommentBox = ({ children }: { children: ReactNode }) => {
       <fieldset className="py-4">
         <button
           type="submit"
-          className="px-4 py-1 bg-blue-500 rounded text-white"
+          className="px-4 py-1 bg-green-theme-green rounded text-white"
         >
           发布
         </button>
