@@ -1,4 +1,5 @@
 import React, { ReactNode, useEffect, useState } from "react";
+import { processList } from "../utils/processList";
 import { UserProps } from "./UserContext";
 
 const apiUrl = "http://localhost:3001/comment";
@@ -10,6 +11,15 @@ export interface CommentProp {
   replyTo: null | number;
   time: string;
   replies: null | CommentProp[];
+}
+// 留言和留言评论的原始类型定义
+export interface OriginCommentProp {
+  id: number;
+  user: UserProps;
+  content: string;
+  replyTo: null | number;
+  time: string;
+  replies: null | number[];
 }
 // 新留言和新留言评论类型定义
 export interface NewCommentProp {
@@ -36,6 +46,7 @@ CommentsListContext.displayName = "CommentsListContext";
 export const CommentListProvider = ({ children }: { children: ReactNode }) => {
   // 定义一个state属性用于存评论列表
   const [commentsList, setCommentsList] = useState<null | CommentProp[]>(null);
+
   // 获取树洞留言列表
   const getCommentsList = () => {
     fetch(apiUrl)
@@ -43,7 +54,20 @@ export const CommentListProvider = ({ children }: { children: ReactNode }) => {
         // 请求成功
         if (response.ok) {
           // 获取树洞留言列表
-          setCommentsList(await response.json());
+          const originList: OriginCommentProp[] = await response.json();
+          const commentList = processList(
+            originList.filter((comment) => {
+              if (!comment.replyTo) {
+                return comment;
+              }
+            }),
+            originList.filter((reply) => {
+              if (reply.replyTo) {
+                return reply;
+              }
+            })
+          );
+          setCommentsList(commentList);
           return Promise.resolve(response.statusText);
         } else {
           return Promise.reject(response.status);

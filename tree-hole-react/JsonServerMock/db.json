@@ -19,26 +19,8 @@
       "replyTo": null,
       "time": "6天前",
       "replies": [
-        {
-          "id": 3,
-          "user": {
-            "nickname": "苍术",
-            "avatar": "https://z3.ax1x.com/2021/09/05/hReKSA.jpg"
-          },
-          "content": "林科大树洞测试mock顶层留言回复1",
-          "replyTo": "1",
-          "time": "10分钟前"
-        },
-        {
-          "id": 4,
-          "user": {
-            "nickname": "Eliaukzzz",
-            "avatar": "https://z3.ax1x.com/2021/09/05/hReKSA.jpg"
-          },
-          "content": "林科大树洞测试mock顶层留言回复2",
-          "replyTo": "1",
-          "time": "刚刚"
-        }
+        3,
+        4
       ],
       "id": 1
     },
@@ -49,7 +31,7 @@
       },
       "content": "林科大树洞测试mock顶层留言2",
       "replyTo": null,
-      "time": "9天前",
+      "time": "6天前",
       "replies": null,
       "id": 2
     },
@@ -58,32 +40,32 @@
         "nickname": "苍术",
         "avatar": "https://z3.ax1x.com/2021/09/05/hReKSA.jpg"
       },
-      "content": "林科大树洞测试mock顶层留言2",
-      "replyTo": null,
+      "content": "林科大树洞测试mock顶层留言回复1",
+      "replyTo": 1,
       "time": "6天前",
-      "replies": [
-        {
-          "id": 3,
-          "user": {
-            "nickname": "苍术",
-            "avatar": "https://z3.ax1x.com/2021/09/05/hReKSA.jpg"
-          },
-          "content": "林科大树洞测试mock顶层留言回复3",
-          "replyTo": "1",
-          "time": "10分钟前"
-        },
-        {
-          "id": 4,
-          "user": {
-            "nickname": "Eliaukzzz",
-            "avatar": "https://z3.ax1x.com/2021/09/05/hReKSA.jpg"
-          },
-          "content": "林科大树洞测试mock顶层留言回复4",
-          "replyTo": "1",
-          "time": "刚刚"
-        }
-      ],
+      "replies": null,
       "id": 3
+    },
+    {
+      "user": {
+        "nickname": "苍术",
+        "avatar": "https://z3.ax1x.com/2021/09/05/hReKSA.jpg"
+      },
+      "content": "林科大树洞测试mock顶层留言回复2",
+      "replyTo": 1,
+      "time": "6天前",
+      "replies": null,
+      "id": 4
+    },
+    {
+      "user": {
+        "nickname": "苍术",
+        "avatar": "https://z3.ax1x.com/2021/09/05/hReKSA.jpg"
+      },
+      "content": "ok？",
+      "replyTo": null,
+      "time": "刚刚",
+      "id": 5
     }
   ]
 }
