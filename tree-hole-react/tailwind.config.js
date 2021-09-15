@@ -12,6 +12,14 @@ module.exports = {
       spacing: {
         "main-p": "2vh",
       },
+      colors: {
+        gary: {
+          "theme-gary": "#636C79",
+        },
+        green: {
+          "theme-green": "#8BB7A2",
+        },
+      },
     },
   },
   variants: {
