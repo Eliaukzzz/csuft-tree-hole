@@ -8,7 +8,7 @@ module.exports = {
       },
       minWidth: {
         "main-w": "94vw",
-        "sidebar-w": "70vw",
+        "app-mw": "17.5rem",
       },
       spacing: {
         "main-p": "2vh",
@@ -23,11 +23,21 @@ module.exports = {
       },
       transitionProperty: {
         h: "height",
+        top: "top",
       },
       spacing: {
-        "lg-items": "8rem",
-        items: "13.25rem",
+        // navBar展开header手机端高度
+        items: "15.875rem",
+        // navBar未展开header手机、pc端高度
         header: "5.375rem",
+        // navBar展开pc端高度
+        "lg-items": "8rem",
+        // navBar未展开分割波浪线高度
+        "no-nav-shade": "5.25rem",
+        // navBar 展开后分割波浪线高度
+        "nav-shade": "15.625rem",
+        // navBar 展开后pc端波浪线高度
+        "pc-shade": "8rem",
       },
     },
   },

@@ -39,7 +39,7 @@ export const CommentListProvider = ({ children }: { children: ReactNode }) => {
   const [commentsList, setCommentsList] = useState<null | CommentProp[]>(null);
 
   // 从LoadProvider中取出isLoading判断是否在加载
-  const { isLoading, setIsLoading } = useLoad();
+  const { setIsLoading } = useLoad();
   // 获取树洞留言列表
   const getCommentsList = () => {
     setIsLoading(true);
