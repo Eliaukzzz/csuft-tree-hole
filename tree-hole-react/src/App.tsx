@@ -3,6 +3,7 @@ import { Route, Switch } from "react-router";
 import { Header } from "./components/Header";
 import { Loading } from "./components/Loading";
 import { useLoad } from "./context/Load";
+import { useShowNav } from "./context/ShowNav";
 import { Account } from "./pages/Account";
 import { Home } from "./pages/Home";
 

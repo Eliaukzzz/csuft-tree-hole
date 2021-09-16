@@ -9,6 +9,15 @@ export const Header = () => {
         showNav ? "h-items lg:h-lg-items" : " h-header"
       } transition-h duration-500 overflow-hidden text-3xl sticky top-0 bg-gary-theme-gary text-white`}
     >
+      {/* navbar遮罩 */}
+      {showNav ? (
+        <div
+          onClick={() => {
+            setShowNav(false);
+          }}
+          className="fixed top-0 left-0 bottom-0 right-0"
+        />
+      ) : null}
       <NavLink
         className="py-6 px-6 border-gary-theme-gary border-b-2 block"
         to={"/"}
@@ -36,6 +45,7 @@ export const Header = () => {
         </a>
       </div>
       <div
+        id="openNav"
         onClick={() => {
           setShowNav(!showNav);
         }}
