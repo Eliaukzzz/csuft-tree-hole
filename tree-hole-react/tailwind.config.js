@@ -35,7 +35,7 @@ module.exports = {
         // navBar未展开分割波浪线高度
         "no-nav-shade": "5.25rem",
         // navBar 展开后分割波浪线高度
-        "nav-shade": "15.625rem",
+        "nav-shade": "15.875rem",
         // navBar 展开后pc端波浪线高度
         "pc-shade": "8rem",
       },

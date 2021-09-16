@@ -1,5 +1,4 @@
 import React from "react";
-import "animate.css";
 import { NavLink } from "react-router-dom";
 import { useShowNav } from "../../context/ShowNav";
 export const Header = () => {
@@ -10,26 +9,29 @@ export const Header = () => {
         showNav ? "h-items lg:h-lg-items" : " h-header"
       } transition-h duration-500 overflow-hidden text-3xl sticky top-0 bg-gary-theme-gary text-white`}
     >
-      <NavLink className="py-6 px-6 border-b-2 block" to={"/"}>
+      <NavLink
+        className="py-6 px-6 border-gary-theme-gary border-b-2 block"
+        to={"/"}
+      >
         林科大树洞
       </NavLink>
-      <div className="overflow-hidden border-b-2 flex justify-center flex-col lg:flex-row items-center transition bg-white">
+      <div className="overflow-hidden border-b-2 flex justify-center flex-col lg:flex-row items-center transition">
         <NavLink
           onClick={() => {
             setShowNav(false);
           }}
-          className="py-2 px-6 border-b-2 lg:border-b-2 lg:border-r-2 text-base w-full text-center bg-gary-theme-gary hover:bg-green-theme-green transition-colors duration-500"
+          className="py-2 px-6 border-gary-theme-gary border-b-2 lg:border-b-2 lg:border-r-2 text-base w-full text-center bg-gray-600 hover:bg-green-theme-green transition-colors duration-500"
           to={"/account"}
         >
           个人信息
         </NavLink>
-        <a className="py-2 px-6 border-b-2 lg:border-b-2 lg:border-r-2 text-base w-full text-center bg-gary-theme-gary hover:bg-green-theme-green transition-colors duration-500">
+        <a className="py-2 px-6 border-gary-theme-gary border-b-2 lg:border-b-2 lg:border-r-2 text-base w-full text-center bg-gray-600 hover:bg-green-theme-green transition-colors duration-500">
           我的留言
         </a>
-        <a className="py-2 px-6 border-b-2 lg:border-b-2 lg:border-r-2 text-base w-full text-center bg-gary-theme-gary hover:bg-green-theme-green transition-colors duration-500">
+        <a className="py-2 px-6 border-gary-theme-gary border-b-2 lg:border-b-2 lg:border-r-2 text-base w-full text-center bg-gray-600 hover:bg-green-theme-green transition-colors duration-500">
           我的收藏
         </a>
-        <a className="py-2 px-6 text-base border-b-2 w-full text-center bg-gary-theme-gary hover:bg-green-theme-green transition-colors duration-500">
+        <a className="py-2 px-6 border-gary-theme-gary text-base border-b-2 w-full text-center bg-gray-600 hover:bg-green-theme-green transition-colors duration-500">
           板块分类
         </a>
       </div>
