@@ -24,6 +24,11 @@ module.exports = {
       transitionProperty: {
         h: "height",
       },
+      spacing: {
+        "lg-items": "8rem",
+        items: "13.25rem",
+        header: "5.375rem",
+      },
     },
   },
   variants: {

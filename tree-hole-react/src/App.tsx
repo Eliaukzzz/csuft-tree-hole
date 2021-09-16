@@ -17,14 +17,14 @@ function App() {
     <div className="App">
       {/* loading组件 */}
       {isLoading ? <Loading /> : null}
-      <main className="p-4 bg-gray-50 min-h-screen">
+      <main className="p-4 bg-gray-50 min-h-screen mx-auto">
         <div className="max-w-screen-xl mx-auto min-h-main-h bg-white rounded-lg shadow-2xl">
           {/* 导航栏 */}
           <Header />
           {/* 输入框 */}
           <CommentBox children="" isTopCommentBox={true} />
           {/* 分割线 */}
-          <div className="custom-shape-divider-top-1631711424">
+          <div className="custom-shape-divider-top-1631711424 sticky top-header">
             <svg
               data-name="Layer 1"
               xmlns="http://www.w3.org/2000/svg"
