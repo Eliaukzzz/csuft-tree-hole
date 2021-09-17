@@ -1,4 +1,4 @@
-import React, { ReactNode, useContext, useEffect, useState } from "react";
+import React, { ReactNode, useContext, useState } from "react";
 import { apiUrl } from "../utils/apiUrl";
 import { useLoad } from "./Load";
 import { UserProps } from "./UserContext";
@@ -85,10 +85,6 @@ export const CommentListProvider = ({ children }: { children: ReactNode }) => {
         console.log(`POST请求链接${apiUrl} 发生${err}错误`);
       });
   };
-  // 挂载时自动获取commentList
-  useEffect(() => {
-    getCommentsList();
-  }, []);
   return (
     <CommentsListContext.Provider
       children={children}

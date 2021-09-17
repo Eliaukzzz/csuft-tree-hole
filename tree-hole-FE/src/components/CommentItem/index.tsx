@@ -1,4 +1,5 @@
 import React from "react";
+import { NavLink } from "react-router-dom";
 import { CommentProp } from "../../context/CommentsListContext";
 
 // 树洞留言和留言回复内容组件
@@ -6,11 +7,14 @@ export const CommentItem = ({ comment }: { comment: CommentProp }) => {
   return (
     <div>
       <div className="flex">
-        <img
-          src={comment.poster.avatar}
-          alt=""
-          className="w-12 h-12 mr-4 rounded-full"
-        />
+        <NavLink to={`/account/${comment.poster.id}`}>
+          <img
+            src={comment.poster.avatar}
+            alt=""
+            className="w-12 h-12 mr-4 rounded-full"
+          />
+        </NavLink>
+
         <div>
           <p>{comment.poster.nickname}</p>
           <p className="text-gray-600 text-sm">{comment.time}</p>

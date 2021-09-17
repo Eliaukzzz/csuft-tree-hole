@@ -1,28 +1,37 @@
 {
   "user": [{
-    "id": 1,
-    "nickname": "苍术",
-    "email": "2421398452@qq.com",
-    "gender": "male",
-    "password": "123456",
-    "avatar": "https://z3.ax1x.com/2021/09/05/hReKSA.jpg",
-    "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6IjI0MjEzOTg0NTJAcXEuY29tIiwicGFzc3dvcmQiOiIxMjM0NTYifQ.WOqAshEJnXX7clWA8HU0EAhOHCfVqSL15SbYHGYIycA"
-  }],
-
-
-
+      "id": 1,
+      "nickname": "苍术",
+      "email": "2421398452@qq.com",
+      "gender": "男",
+      "password": "123456",
+      "avatar": "https://z3.ax1x.com/2021/09/05/hReKSA.jpg",
+      "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6IjI0MjEzOTg0NTJAcXEuY29tIiwicGFzc3dvcmQiOiIxMjM0NTYifQ.WOqAshEJnXX7clWA8HU0EAhOHCfVqSL15SbYHGYIycA"
+    },
+    {
+      "id": 2,
+      "nickname": "Eliauk",
+      "avatar": "https://z3.ax1x.com/2021/09/17/4MTXJ1.jpg",
+      "email": "2421398452@qq.com",
+      "gender": "男",
+      "password": "123456",
+      "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6IjI0MjEzOTg0NTJAcXEuY29tIiwicGFzc3dvcmQiOiIxMjM0NTYifQ.WOqAshEJnXX7clWA8HU0EAhOHCfVqSL15SbYHGYIycA"
+    }
+  ],
   "comment": [{
       "poster": {
         "nickname": "苍术",
-        "avatar": "https://z3.ax1x.com/2021/09/05/hReKSA.jpg"
+        "avatar": "https://z3.ax1x.com/2021/09/05/hReKSA.jpg",
+        "id": 1
       },
       "content": "林科大树洞测试mock顶层留言1",
       "replyTo": null,
       "time": "6天前",
       "replies": [{
           "poster": {
-            "nickname": "苍术",
-            "avatar": "https://z3.ax1x.com/2021/09/05/hReKSA.jpg"
+            "id": 2,
+            "nickname": "Eliauk",
+            "avatar": "https://z3.ax1x.com/2021/09/17/4MTXJ1.jpg"
           },
           "content": "林科大树洞测试mock顶层留言回复1",
           "replyTo": 1,
@@ -33,7 +42,8 @@
         {
           "poster": {
             "nickname": "苍术",
-            "avatar": "https://z3.ax1x.com/2021/09/05/hReKSA.jpg"
+            "avatar": "https://z3.ax1x.com/2021/09/05/hReKSA.jpg",
+            "id": 1
           },
           "content": "林科大树洞测试mock顶层留言回复2",
           "replyTo": 1,
@@ -46,8 +56,9 @@
     },
     {
       "poster": {
-        "nickname": "苍术",
-        "avatar": "https://z3.ax1x.com/2021/09/05/hReKSA.jpg"
+        "id": 2,
+        "nickname": "Eliauk",
+        "avatar": "https://z3.ax1x.com/2021/09/17/4MTXJ1.jpg"
       },
       "content": "林科大树洞测试mock顶层留言2",
       "replyTo": null,

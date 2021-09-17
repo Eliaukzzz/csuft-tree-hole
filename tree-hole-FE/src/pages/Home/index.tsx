@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { CommentBox } from "../../components/CommentBox";
 import { CommentItem } from "../../components/CommentItem";
 import { CommentReplyBox } from "../../components/CommentReplyBox";
@@ -9,7 +9,11 @@ import { useShowNav } from "../../context/ShowNav";
 export const Home = () => {
   const { showNav } = useShowNav();
   // 从CommentsListProvider中获得留言列表
-  const { commentsList } = useCommentsList();
+  const { commentsList, getCommentsList } = useCommentsList();
+  // 主页挂载时 请求获取列表
+  useEffect(() => {
+    getCommentsList();
+  }, []);
   return (
     <div>
       {/* 留言回复输入框 */}

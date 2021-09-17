@@ -1,32 +1,63 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
+import { useParams } from "react-router-dom";
+import { UserProps, useUser } from "../../context/UserContext";
 
 export const Account = () => {
+  // 获取当前登录的用户信息
+  const { currentUser, getUserInfo, logout } = useUser();
+  // 接收对应的用户id
+  const { id }: { id: string } = useParams<any>();
+  // 获取对应用户信息
+  const [pageUser, setPageUser] = useState<UserProps>({});
+  // 挂载该页面的时候获得对应的用户信息
+  useEffect(() => {
+    if (currentUser.id === +id) {
+      // 如果是当前登录用户自己的信息页面
+      setPageUser(currentUser);
+    } else {
+      // 如果是其他用户的信息页面
+      // 使用getUserInfo获取对应用户id的信息
+      getUserInfo(+id).then((result) => {
+        setPageUser(result);
+      });
+    }
+  }, []);
   return (
-    <div className="w-full h-full flex justify-center items-center flex-col pt-10 min-w-account-mw">
-      <table className="grid grid-cols-1 w-2/3 auto-rows-auto">
-        <tr className="grid grid-cols-2 items-center border-b-2 py-3 px-3">
-          <td>头像</td>
-          <td>
-            <img
-              className="w-12 h-12 rounded-full float-right"
-              src="https://z3.ax1x.com/2021/09/05/hReKSA.jpg"
-              alt=""
-            />
-          </td>
-        </tr>
-        <tr className="grid grid-cols-2 items-center border-b-2 py-3 px-3">
-          <td>昵称</td> <td className="text-right">这里不卖八宝粥</td>
-        </tr>
-        <tr className="grid grid-cols-2 items-center border-b-2 py-3 px-3">
-          <td>id</td> <td className="text-right">1</td>
-        </tr>
-        <tr className="grid grid-cols-2 items-center border-b-2 py-3 px-3">
-          <td>性别</td> <td className="text-right">男</td>
-        </tr>
+    <div className="w-full h-full flex justify-center items-center flex-col pt-10 min-w-account-mw min-h-screen">
+      <table className="grid grid-cols-1 w-2/3 max-w-md auto-rows-auto">
+        <tbody>
+          <tr className="grid grid-cols-2 items-center border-b-2 py-3 pl-3 pr-1">
+            <td>头像</td>
+            <td>
+              <img
+                className="w-12 h-12 rounded-full float-right"
+                src={pageUser.avatar}
+                alt=""
+              />
+            </td>
+          </tr>
+          <tr className="grid grid-cols-2 items-center border-b-2 py-3 px-3">
+            <td>昵称</td>
+            <td className="text-right">{pageUser.nickname}</td>
+          </tr>
+          <tr className="grid grid-cols-2 items-center border-b-2 py-3 px-3">
+            <td>id</td>
+            <td className="text-right">{pageUser.id}</td>
+          </tr>
+          <tr className="grid grid-cols-2 items-center border-b-2 py-3 px-3">
+            <td>性别</td>
+            <td className="text-right">{pageUser.gender}</td>
+          </tr>
+        </tbody>
       </table>
-      <button className="px-4 py-1 my-11 w-30 bg-green-theme-green rounded text-white">
-        退出登录
-      </button>
+      {currentUser.id === +id ? (
+        <button
+          onClick={logout}
+          className="px-4 py-1 my-11 w-30 bg-green-theme-green rounded text-white"
+        >
+          退出登录
+        </button>
+      ) : null}
     </div>
   );
 };

@@ -5,7 +5,7 @@
     "dev": "vite",
     "build": "tsc && vite build",
     "serve": "vite preview",
-    "j-server": "json-server JsonServerMock/db.json --watch --port 3001"
+    "j-server": "json-server JsonServerMock/db.json --watch --port 3001  --middlewares ./JsonServerMock/middleware.js"
   },
   "dependencies": {
     "@craco/craco": "^6.3.0",
