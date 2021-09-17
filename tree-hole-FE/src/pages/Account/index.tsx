@@ -23,7 +23,7 @@ export const Account = () => {
     }
   }, []);
   return (
-    <div className="w-full h-full flex justify-center items-center flex-col pt-10 min-w-account-mw min-h-screen">
+    <div className="flex items-center flex-col pt-10 min-w-account-mw">
       <table className="grid grid-cols-1 w-2/3 max-w-md auto-rows-auto">
         <tbody>
           <tr className="grid grid-cols-2 items-center border-b-2 py-3 pl-3 pr-1">
