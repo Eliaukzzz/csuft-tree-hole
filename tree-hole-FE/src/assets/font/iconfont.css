@@ -1,0 +1,36 @@
+@font-face {
+  font-family: "iconfont";
+  /* Project id 2810289 */
+  src: url('iconfont.woff2?t=1631540282763') format('woff2'),
+    url('iconfont.woff?t=1631540282763') format('woff'),
+    url('iconfont.ttf?t=1631540282763') format('truetype');
+}
+
+.iconfont {
+  font-family: "iconfont" !important;
+  font-size: 16px;
+  font-style: normal;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.icon-liebiao5:before {
+  content: "\e6e5";
+}
+
+
+.custom-shape-divider-top-1631711424 {
+  width: 100%;
+  overflow: hidden;
+  line-height: 0;
+}
+
+.custom-shape-divider-top-1631711424 svg {
+  display: block;
+  width: calc(100% + 1.3px);
+  height: 33px;
+}
+
+.custom-shape-divider-top-1631711424 .shape-fill {
+  fill: #636C79;
+}
