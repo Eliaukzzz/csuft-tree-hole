@@ -1,11 +1,11 @@
 module.exports = (req, res, next) => {
-  if (req.method === "POST" && req.path === "/user") {
+  if (req.method === "POST" && req.path === "/users") {
     if (
       req.body.email === "2421398452@qq.com" &&
       req.body.password === "123456"
     ) {
       return res.status(200).json({
-        user: {
+        users: {
           id: 1,
           nickname: "苍术",
           email: "2421398452@qq.com",

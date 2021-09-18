@@ -43,7 +43,7 @@ export const UserContextProvider = ({ children }: { children: ReactNode }) => {
   const login = (data: { email: string; password: string }) => {
     // 登录的第一时间先将loading状态设置为true
     setIsLoading(true);
-    return fetch(`${apiUrl}user`, {
+    return fetch(`${apiUrl}users`, {
       method: "POST",
       headers: {
         // body类型为json
@@ -56,7 +56,7 @@ export const UserContextProvider = ({ children }: { children: ReactNode }) => {
         // 请求成功时
         const data = await response.json();
         setIsLoading(false); // loading状态设为false
-        const user = data.user as UserProps;
+        const user = data.users as UserProps;
         // 把token 储存在localStorage的__CSUFTTreeHoleToken__中
         localStorage.setItem("__CSUFTTreeHoleToken__", user.token as string);
         // 返回携带用户数据的Promise
@@ -73,7 +73,7 @@ export const UserContextProvider = ({ children }: { children: ReactNode }) => {
   const getUserInfo = (id: number) => {
     // 开始获取信息时Loading设为true
     setIsLoading(true);
-    return fetch(`${apiUrl}user/?id=${id}`).then(async (response) => {
+    return fetch(`${apiUrl}users/?id=${id}`).then(async (response) => {
       if (response.ok) {
         const data = await response.json();
         // 获取到信息时 Loading设为false

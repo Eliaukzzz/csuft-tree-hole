@@ -12,7 +12,7 @@ function App() {
   const { currentUser } = useUser();
   return (
     <>
-      <main className="p-4 bg-gray-50 min-h-screen mx-auto min-w-app-mw">
+      <main className="p-4 min-h-screen mx-auto min-w-app-mw bg-bg">
         {/* loading组件 */}
         {isLoading ? <Loading /> : null}
         {currentUser.isLogin ? <AuthenticatedApp /> : <UnAuthenticatedApp />}

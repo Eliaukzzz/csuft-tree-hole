@@ -7,8 +7,8 @@ import { Home } from "../pages/Home";
 // 状态为已经登录的界面
 export const AuthenticatedApp = () => {
   return (
-    <>
-      <div className="relative max-w-screen-xl mx-auto min-h-main-h bg-white rounded-lg shadow-2xl">
+    <div>
+      <div className="relative mx-auto min-h-main-h bg-white rounded-lg shadow-2xl max-w-screen-md">
         {/* 导航栏 */}
         <Header />
         {/* Routes */}
@@ -19,6 +19,6 @@ export const AuthenticatedApp = () => {
           <Route path="/account/:id" component={Account} />
         </Switch>
       </div>
-    </>
+    </div>
   );
 };

@@ -39,6 +39,9 @@ module.exports = {
         // navBar 展开后pc端波浪线高度
         "pc-shade": "8rem",
       },
+      backgroundImage: (theme) => ({
+        bg: "url('./src/assets/img/bg.png')",
+      }),
     },
   },
   variants: {
