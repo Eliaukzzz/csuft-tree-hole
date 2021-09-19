@@ -1,6 +1,6 @@
 import React, { useState } from "react";
-import { Login } from "./Login";
-import { Register } from "./Register";
+import { Login } from "./components/Login";
+import { Register } from "./components/Register";
 
 // 未登录时显示的界面
 export const UnAuthenticatedApp = () => {

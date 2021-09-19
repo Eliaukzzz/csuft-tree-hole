@@ -1,7 +1,7 @@
 import React, { FormEvent, useState } from "react";
-import { AvatarUploader } from "../AuthenticatedApp/components/AvatarUploader";
-import { ValidateInput } from "./components/ValidateInput";
-import { useUser } from "../context/UserContext";
+import { AvatarUploader } from "../AvatarUploader";
+import { ValidateInput } from "../ValidateInput";
+import { useUser } from "../../../context/UserContext";
 export const Register = ({
   setIsLogin,
 }: {

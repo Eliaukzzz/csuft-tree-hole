@@ -1,7 +1,7 @@
 import React, { FormEvent, useEffect, useState } from "react";
 import { useHistory } from "react-router";
-import { ValidateInput } from "./components/ValidateInput";
-import { useUser } from "../context/UserContext";
+import { ValidateInput } from "../ValidateInput";
+import { useUser } from "../../../context/UserContext";
 export const Login = ({
   setIsLogin,
 }: {
