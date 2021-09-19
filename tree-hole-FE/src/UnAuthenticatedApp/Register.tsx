@@ -1,11 +1,24 @@
-import React, { FormEvent } from "react";
-import { AvatarUploader } from "../components/AvatarUploader";
+import React, { FormEvent, useState } from "react";
+import { AvatarUploader } from "../AuthenticatedApp/components/AvatarUploader";
+import { ValidateInput } from "./components/ValidateInput";
 import { useUser } from "../context/UserContext";
 export const Register = ({
   setIsLogin,
 }: {
   setIsLogin: React.Dispatch<React.SetStateAction<boolean>>;
 }) => {
+  // 表单验证是否通过
+  const [fromPassStatus, setFromPassStatus] = useState<boolean>(true);
+  // 昵称
+  const [nickname, setNickname] = useState<string>("");
+
+  // 邮箱
+  const [email, setEmail] = useState<string>("");
+  // 密码
+  const [password, setPassword] = useState<string>("");
+  // 重复密码
+  const [verifyPassword, setVerifyPassword] = useState<string>("");
+  // 处理表单提交
   const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     // const email: string = (event.currentTarget.elements[0] as HTMLInputElement)
@@ -29,41 +42,50 @@ export const Register = ({
           </div>
         </div>
         {/* 上传昵称 */}
-        <div>
-          <input
-            type="text"
-            name="nickname"
-            className="border-2 rounded m-2 p-2"
-            placeholder="请输入昵称"
-          />
-        </div>
+        {/* <ValidateInput
+          type="text"
+          name="nickname"
+          className="border-2 rounded m-2 p-2"
+          placeholder="请输入昵称"
+          validateType="nickname"
+          model={setNickname}
+          value={nickname}
+          setThisPass={}
+          setFromPassStatus={setFromPassStatus}
+        /> */}
         {/* 上传邮箱 */}
-        <div>
-          <input
-            type="text"
-            name="email"
-            className="border-2 rounded m-2 p-2"
-            placeholder="请输入邮箱"
-          />
-        </div>
+        {/* <ValidateInput
+          type="text"
+          name="email"
+          className="border-2 rounded m-2 p-2"
+          placeholder="请输入邮箱"
+          validateType="email"
+          model={setEmail}
+          value={email}
+          setFromPassStatus={setFromPassStatus}
+        /> */}
         {/* 上传密码 */}
-        <div>
-          <input
-            type="password"
-            name="password"
-            className="border-2 rounded m-2 p-2"
-            placeholder="请输入密码"
-          />
-        </div>
-        <div>
-          <input
-            type="password"
-            name="verify-password"
-            className="border-2 rounded m-2 p-2"
-            placeholder="请再次输入密码"
-          />
-        </div>
-        <div className="grid gap-3 grid-rows-1 grid-cols-2">
+        {/* <ValidateInput
+          type="password"
+          name="password"
+          className="border-2 rounded m-2 p-2"
+          placeholder="请输入密码"
+          validateType="password"
+          model={setPassword}
+          value={password}
+          setFromPassStatus={setFromPassStatus}
+        /> */}
+        {/* <ValidateInput
+          type="verify-password"
+          name="verify-password"
+          className="border-2 rounded m-2 p-2"
+          placeholder="请再次输入密码"
+          validateType="password"
+          model={setVerifyPassword}
+          value={verifyPassword}
+          setFromPassStatus={setFromPassStatus}
+        /> */}
+        <div className="grid gap-3 grid-rows-1 grid-cols-2 mt-3">
           <button
             type="submit"
             className="px-4 py-1 bg-green-theme-green rounded border text-white"

@@ -1,7 +1,7 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
-import { useShowNav } from "../../context/ShowNav";
-import { useUser } from "../../context/UserContext";
+import { useShowNav } from "../../../context/ShowNav";
+import { useUser } from "../../../context/UserContext";
 export const Header = () => {
   // 从ShowNavContext获取控制导航栏是否展开的状态
   const { showNav, setShowNav } = useShowNav();
@@ -48,7 +48,7 @@ export const Header = () => {
           }}
           className="py-2 px-6 border-gary-theme-gary border-b-2 lg:border-b-2 lg:border-r-2 text-base w-full text-center bg-gray-600 hover:bg-green-theme-green transition-colors duration-500"
         >
-          我的收藏
+          我喜欢的
         </a>
         <a
           onClick={() => {
@@ -56,7 +56,7 @@ export const Header = () => {
           }}
           className="py-2 px-6 border-gary-theme-gary text-base border-b-2 w-full text-center bg-gray-600 hover:bg-green-theme-green transition-colors duration-500"
         >
-          板块分类
+          关于树洞
         </a>
       </div>
       <button

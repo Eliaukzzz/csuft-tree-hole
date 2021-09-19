@@ -1,6 +1,6 @@
 import React from "react";
 import { Route, Switch } from "react-router";
-import { Header } from "../components/Header";
+import { Header } from "./components/Header";
 import { Account } from "../pages/Account";
 import { Home } from "../pages/Home";
 

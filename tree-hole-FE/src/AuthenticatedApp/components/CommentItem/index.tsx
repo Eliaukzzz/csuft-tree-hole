@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { NavLink } from "react-router-dom";
-import { CommentProp } from "../../context/CommentsListContext";
-import { useUser } from "../../context/UserContext";
+import { CommentProp } from "../../../context/CommentsListContext";
+import { useUser } from "../../../context/UserContext";
 
 // 树洞留言和留言回复内容组件
 export const CommentItem = ({

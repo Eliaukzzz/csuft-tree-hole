@@ -1,8 +1,8 @@
 import React, { useEffect } from "react";
-import { CommentBox } from "../../components/CommentBox";
-import { CommentItem } from "../../components/CommentItem";
-import { CommentReplyBox } from "../../components/CommentReplyBox";
-import { ReplyCommentContainer } from "../../components/ReplyCommentContainer";
+import { CommentBox } from "../../AuthenticatedApp/components/CommentBox";
+import { CommentItem } from "../../AuthenticatedApp/components/CommentItem";
+import { CommentReplyBox } from "../../AuthenticatedApp/components/CommentReplyBox";
+import { ReplyCommentContainer } from "../../AuthenticatedApp/components/ReplyCommentContainer";
 import { useCommentsList } from "../../context/CommentsListContext";
 import { useShowNav } from "../../context/ShowNav";
 
