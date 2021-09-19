@@ -41,11 +41,17 @@ export const Home = () => {
         {commentsList?.map((comment) => {
           return (
             <div key={comment.id}>
-              <CommentItem comment={comment} />
+              <CommentItem isReply={false} comment={comment} />
               {comment?.replies ? (
                 <ReplyCommentContainer>
                   {comment.replies.map((reply) => {
-                    return <CommentItem key={reply.id} comment={reply} />;
+                    return (
+                      <CommentItem
+                        isReply={true}
+                        key={reply.id}
+                        comment={reply}
+                      />
+                    );
                   })}
                 </ReplyCommentContainer>
               ) : null}

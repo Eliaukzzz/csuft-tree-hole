@@ -1,6 +1,6 @@
 import React, { ReactNode, useState } from "react";
 import {
-  NewCommentProp,
+  CommentProp,
   useCommentsList,
 } from "../../context/CommentsListContext";
 
@@ -22,15 +22,18 @@ export const CommentBox = ({
       | React.KeyboardEvent<HTMLTextAreaElement>
   ) => {
     event.preventDefault();
-    const mockData: NewCommentProp = {
+    const mockData: CommentProp = {
       poster: {
-        isLogin: true,
+        id: 1,
         nickname: "苍术",
         avatar: "https://z3.ax1x.com/2021/09/05/hReKSA.jpg",
       },
       content: newComment,
       replyTo: null,
       time: "刚刚",
+      dislikes: 0,
+      likes: 0,
+      replies: null,
     };
     createNewComment(mockData);
     setNewComment("");

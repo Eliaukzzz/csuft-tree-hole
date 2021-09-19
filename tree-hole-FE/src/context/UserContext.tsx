@@ -9,6 +9,8 @@ export interface UserProps {
   nickname?: string;
   avatar?: string;
   email?: string;
+  favorite?: number[];
+  hate?: number[];
   gender?: string;
   token?: string;
 }
@@ -65,7 +67,7 @@ export const UserContextProvider = ({ children }: { children: ReactNode }) => {
         // 请求失败时，loading状态设为false
         setIsLoading(false);
         // 返回携带错误信息的Promise
-        return Promise.reject(response.text);
+        return Promise.reject(await response.json());
       }
     });
   };
@@ -83,7 +85,7 @@ export const UserContextProvider = ({ children }: { children: ReactNode }) => {
       } else {
         // 获取失败时，loading设为false
         setIsLoading(false);
-        return Promise.reject(response.status);
+        return Promise.reject();
       }
     });
   };

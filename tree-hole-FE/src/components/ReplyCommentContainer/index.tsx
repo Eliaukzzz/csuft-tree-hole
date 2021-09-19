@@ -6,5 +6,5 @@ export const ReplyCommentContainer = ({
 }: {
   children: ReactNode;
 }) => {
-  return <div className="pl-8 my-5 border-l-2 border-gray-200">{children}</div>;
+  return <div className="pl-8 my-3 border-l-2 border-gray-200">{children}</div>;
 };

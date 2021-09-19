@@ -59,7 +59,7 @@ export const Header = () => {
           板块分类
         </a>
       </div>
-      <div
+      <button
         id="openNav"
         onClick={() => {
           setShowNav(!showNav);
@@ -67,7 +67,7 @@ export const Header = () => {
         className="iconfont text-3xl inline-block absolute right-5 top-6"
       >
         &#xe6e5;
-      </div>
+      </button>
     </div>
   );
 };
