@@ -1,4 +1,4 @@
-import React, { FormEvent } from "react";
+import React, { FormEvent, useState } from "react";
 import { useHistory } from "react-router";
 import { useUser } from "../context/UserContext";
 export const Login = ({
@@ -7,7 +7,8 @@ export const Login = ({
   setIsLogin: React.Dispatch<React.SetStateAction<boolean>>;
 }) => {
   // useHistory 允许访问可能用于导航的历史实例
-  let history = useHistory();
+  const history = useHistory();
+  const [errMessage, setErrMessage] = useState<string>("");
   // 获取登录的函数
   const { login, setCurrentUser } = useUser();
   // 处理表单提交
@@ -15,12 +16,13 @@ export const Login = ({
     // 阻止默认行为
     event.preventDefault();
     // 获取邮箱
-    const email: string = (event.currentTarget.elements[0] as HTMLInputElement)
-      .value;
+    const email: string = (
+      event.currentTarget.elements[0] as HTMLInputElement
+    ).value.trim();
     // 获取密码
     const password: string = (
       event.currentTarget.elements[1] as HTMLInputElement
-    ).value;
+    ).value.trim();
     // 登录后获取返回的用户信息 设置当前用户
     login({ email, password })
       .then((user) => {
@@ -29,10 +31,11 @@ export const Login = ({
         // 跳转到主页面
         history.push("/");
       })
-      .catch((err) => console.error(err)); // 如果请求失败 报错
+      .catch((err) => setErrMessage(err.message)); // 如果请求失败 报错
   };
   return (
     <div className="flex flex-col justify-center items-center rounded-xl bg-white shadow-lg p-10">
+      <h2 className="text-3xl text-green-theme-green pb-3">林科大树洞</h2>
       <h2 className="text-2xl text-green-theme-green">用户登录</h2>
       <form onSubmit={handleSubmit}>
         <div>
@@ -50,6 +53,9 @@ export const Login = ({
             className="border-2 rounded m-2 p-2"
             placeholder="请输入密码"
           />
+        </div>
+        <div className="flex items-center h-8 pl-3 text-red-600">
+          <p>{errMessage}</p>
         </div>
         <div className="grid gap-3 grid-rows-1 grid-cols-2">
           <button
