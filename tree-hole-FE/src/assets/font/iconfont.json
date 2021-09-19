@@ -6,6 +6,27 @@
   "description": "",
   "glyphs": [
     {
+      "icon_id": "15838435",
+      "name": "bad",
+      "font_class": "bad",
+      "unicode": "e666",
+      "unicode_decimal": 58982
+    },
+    {
+      "icon_id": "15838474",
+      "name": "favorite",
+      "font_class": "favorite",
+      "unicode": "e66f",
+      "unicode_decimal": 58991
+    },
+    {
+      "icon_id": "15838479",
+      "name": "fabulous",
+      "font_class": "fabulous",
+      "unicode": "e670",
+      "unicode_decimal": 58992
+    },
+    {
       "icon_id": "24268439",
       "name": "列表5",
       "font_class": "liebiao5",
