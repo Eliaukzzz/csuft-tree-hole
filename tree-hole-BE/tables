@@ -1,30 +1,83 @@
 mysql> create table User(
-    -> Id varchar(30) not null primary key,
+    -> Id int not null primary key,
     -> Name varchar(30) not null,
-    -> Email varchar(30) not null,
-    -> Password varchar(30) not null,
-    -> Avater longblob
+    -> Email varchar(20) not null,
+    -> Pasword varchar(30) not null,
+    -> Avater longblob,              
+    -> Favorite varchar(255),    -> Hate varchar(255),
+    -> Collect varchar(255),
+    -> Sex char(5)
     -> );
-Query OK, 0 rows affected (0.16 sec)
+Query OK, 0 rows affected (0.05 sec)
 
-mysql> create table Message(
-    -> Message_Id varchar(30) not null primary key,
-    -> Id varchar(30) references User(Id),
-    -> Avater longblob references User(Avater),
-    -> content varchar(1000) not null,
-    -> Time Datetime not null,
-    -> Reply_Message varchar(30),
-    -> Replies varchar(30)
+mysql> create table Comment(                
+    -> Commentid int not null primary key,
+    -> Id int not null references User(Id),
+    -> Content varchar(255) not null,
+    -> Time datetime not null,
+    -> Liking int, 
+    -> Disliking int,
+    -> Replies varchar(255)
     -> );
-Query OK, 0 rows affected (0.09 sec)
+Query OK, 0 rows affected (0.03 sec)
+
+mysql> create table Reply(
+    -> Replyid int not null primary key,
+    -> Id int not null references User(id),
+    -> 
+    -> Commentid int not null references Comment(Commentid),
+    -> Reply_content varchar(255) not null,
+    -> Reply_time datetime not null 
+    -> );
+Query OK, 0 rows affected (0.02 sec)
 
 mysql> show tables;
-+-------------------+
-| Tables_in_firstdb |
-+-------------------+
-| Message           |
-| User              |
-| conversation      |
-| student           |
-+-------------------+
-4 rows in set (0.20 sec)
++----------------------+
+| Tables_in_treeholedb |
++----------------------+
+| comment              |
+| reply                |
+| user                 |
++----------------------+
+3 rows in set (0.01 sec)
+
+mysql> desc user;
++----------+--------------+------+-----+---------+-------+
+| Field    | Type         | Null | Key | Default | Extra |
++----------+--------------+------+-----+---------+-------+
+| Id       | int          | NO   | PRI | NULL    |       |
+| Name     | varchar(30)  | NO   |     | NULL    |       |
+| Email    | varchar(20)  | NO   |     | NULL    |       |
+| Pasword  | varchar(30)  | NO   |     | NULL    |       |
+| Avater   | longblob     | YES  |     | NULL    |       |
+| Favorite | varchar(255) | YES  |     | NULL    |       |
+| Hate     | varchar(255) | YES  |     | NULL    |       |
+| Sex      | char(5)      | YES  |     | NULL    |       |
++----------+--------------+------+-----+---------+-------+
+8 rows in set (0.00 sec)
+
+mysql> desc reply;
++---------------+--------------+------+-----+---------+-------+
+| Field         | Type         | Null | Key | Default | Extra |
++---------------+--------------+------+-----+---------+-------+
+| Replyid       | int          | NO   | PRI | NULL    |       |
+| Id            | int          | NO   |     | NULL    |       |
+| Commentid     | int          | NO   |     | NULL    |       |
+| Reply_content | varchar(255) | NO   |     | NULL    |       |
+| Reply_time    | datetime     | NO   |     | NULL    |       |
++---------------+--------------+------+-----+---------+-------+
+5 rows in set (0.01 sec)
+
+mysql> desc comment;
++-----------+--------------+------+-----+---------+-------+
+| Field     | Type         | Null | Key | Default | Extra |
++-----------+--------------+------+-----+---------+-------+
+| Commentid | int          | NO   | PRI | NULL    |       |
+| Id        | int          | NO   |     | NULL    |       |
+| Content   | varchar(255) | NO   |     | NULL    |       |
+| Time      | datetime     | NO   |     | NULL    |       |
+| Liking    | int          | YES  |     | NULL    |       |
+| Disliking | int          | YES  |     | NULL    |       |
+| Replies   | varchar(255) | YES  |     | NULL    |       |
++-----------+--------------+------+-----+---------+-------+
+7 rows in set (0.00 sec)
