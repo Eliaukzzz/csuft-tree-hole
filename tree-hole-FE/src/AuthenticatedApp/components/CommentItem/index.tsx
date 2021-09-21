@@ -49,14 +49,14 @@ export const CommentItem = ({
         >
           {openSelect ? (
             <div
-              className="fixed top-0 left-0 blur-0 right-0 w-full h-full z-40"
+              className="fixed top-0 left-0 blur-0 right-0 w-full h-full z-"
               onClick={() => {
                 setOpenSelect(false);
               }}
             ></div>
           ) : null}
           <div
-            className="w-full h-5 z-50"
+            className="w-full h-5"
             onClick={() => setOpenSelect(!openSelect)}
           >
             <button className="float-right">
@@ -94,7 +94,7 @@ export const CommentItem = ({
           <p className="text-gray-600 text-sm">
             {comment.time}
             {isReply ? null : (
-              <span className="text-sm opacity-70 float-right ml-4">
+              <span className="text-sm float-right ml-4 text-green-theme-green">
                 #{type}#
               </span>
             )}

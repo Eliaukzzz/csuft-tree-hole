@@ -70,7 +70,7 @@ export const CommentBox = ({
             value={newCommentType}
             name="type-select"
             id="type-select"
-            className="px-1 my-4 ml-1 w-24 rounded"
+            className="px-1 my-3 ml-1 w-24 rounded"
             onChange={(event) => {
               setNewCommentType(event.target.value as CommentType);
             }}
@@ -81,7 +81,7 @@ export const CommentBox = ({
             <option value="seekHelp">求助</option>
           </select>
         ) : null}
-        <fieldset className="py-4">
+        <fieldset className="pb-3">
           <button
             type="submit"
             className="px-4 py-1 bg-green-theme-green rounded text-white"
