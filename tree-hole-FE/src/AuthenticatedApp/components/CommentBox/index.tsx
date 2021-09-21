@@ -1,6 +1,7 @@
 import React, { ReactNode, useState } from "react";
 import {
   CommentProp,
+  CommentType,
   useCommentsList,
 } from "../../../context/CommentsListContext";
 
@@ -12,8 +13,12 @@ export const CommentBox = ({
   children: ReactNode;
   isTopCommentBox?: boolean;
 }) => {
-  // 留言与回复框受控组件
+  // 输入框受控组件
   const [newComment, setNewComment] = useState("");
+
+  // select受控组件
+  const [newCommentType, setNewCommentType] = useState<CommentType>("life");
+
   const { createNewComment } = useCommentsList();
   // ! 没有后端暂时前端模拟数据发送请求
   const pushNewComment = (
@@ -33,6 +38,7 @@ export const CommentBox = ({
       dislikes: 0,
       likes: 0,
       replies: null,
+      type: newCommentType,
     };
     createNewComment(mockData);
     setNewComment("");
@@ -56,11 +62,25 @@ export const CommentBox = ({
             setNewComment(event.target.value);
           }}
           value={newComment}
-          name="comment"
-          id=""
-          placeholder="在树洞里宣泄你的情感，留下你的吐槽吧"
+          placeholder="那些现实中不能发出的声音，请把它留在这里"
           className="bg-gray-50 mt-3 p-2 rounded border-2 border-gary-theme-gary"
         ></textarea>
+        {isTopCommentBox ? (
+          <select
+            value={newCommentType}
+            name="type-select"
+            id="type-select"
+            className="px-1 my-4 ml-1 w-24 rounded"
+            onChange={(event) => {
+              setNewCommentType(event.target.value as CommentType);
+            }}
+          >
+            <option value="life">生活琐事</option>
+            <option value="relationship">寝室关系</option>
+            <option value="emotion">情感</option>
+            <option value="seekHelp">求助</option>
+          </select>
+        ) : null}
         <fieldset className="py-4">
           <button
             type="submit"

@@ -6,11 +6,7 @@ module.exports = {
         "main-h": "96vh",
       },
       minWidth: {
-        "main-w": "94vw",
         "app-mw": "17.5rem",
-      },
-      spacing: {
-        "main-p": "2vh",
       },
       colors: {
         gary: {

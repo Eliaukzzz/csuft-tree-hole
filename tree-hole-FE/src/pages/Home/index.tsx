@@ -1,7 +1,8 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { CommentBox } from "../../AuthenticatedApp/components/CommentBox";
 import { CommentItem } from "../../AuthenticatedApp/components/CommentItem";
 import { CommentReplyBox } from "../../AuthenticatedApp/components/CommentReplyBox";
+import { CommentTypeBox } from "../../AuthenticatedApp/components/CommentTypeBox";
 import { ReplyCommentContainer } from "../../AuthenticatedApp/components/ReplyCommentContainer";
 import { useCommentsList } from "../../context/CommentsListContext";
 import { useShowNav } from "../../context/ShowNav";
@@ -9,11 +10,19 @@ import { useShowNav } from "../../context/ShowNav";
 export const Home = () => {
   const { showNav } = useShowNav();
   // 从CommentsListProvider中获得留言列表
-  const { commentsList, getCommentsList } = useCommentsList();
-  // 主页挂载时 请求获取列表
+  const {
+    commentsList,
+    commentListType,
+    getCommentsList,
+    setCommentsList,
+    setCommentListType,
+  } = useCommentsList();
+  // 切换页面类型时 请求获取列表
   useEffect(() => {
-    getCommentsList();
-  }, []);
+    getCommentsList(commentListType).then((list) => {
+      setCommentsList(list);
+    });
+  }, [commentListType]);
   return (
     <div>
       {/* 留言回复输入框 */}
@@ -38,10 +47,18 @@ export const Home = () => {
       </div>
       {/* 树洞留言区 */}
       <div className="px-5">
+        <CommentTypeBox
+          listType={commentListType}
+          setListType={setCommentListType}
+        />
         {commentsList?.map((comment) => {
           return (
             <div key={comment.id}>
-              <CommentItem isReply={false} comment={comment} />
+              <CommentItem
+                isReply={false}
+                comment={comment}
+                commentType={comment.type}
+              />
               {comment?.replies ? (
                 <ReplyCommentContainer>
                   {comment.replies.map((reply) => {

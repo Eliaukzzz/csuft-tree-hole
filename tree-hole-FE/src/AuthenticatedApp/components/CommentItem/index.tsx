@@ -1,28 +1,62 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { NavLink } from "react-router-dom";
-import { CommentProp, ReplyProp } from "../../../context/CommentsListContext";
+import {
+  CommentProp,
+  CommentType,
+  ReplyProp,
+} from "../../../context/CommentsListContext";
 import { useUser } from "../../../context/UserContext";
 
 // 树洞留言和留言回复内容组件
 export const CommentItem = ({
   comment,
   isReply = false,
+  commentType,
 }: {
   comment: CommentProp | ReplyProp;
   isReply: boolean;
+  commentType?: CommentType; // 留言类型
 }) => {
   const [openSelect, setOpenSelect] = useState<boolean>(false);
   const { currentUser } = useUser();
+  const [type, setType] = useState<string>("");
+  useEffect(() => {
+    // 将留言类型转化为
+    switch (commentType) {
+      case "life":
+        setType("生活琐事");
+        return;
+      case "relationship":
+        setType("寝室关系");
+        return;
+      case "emotion":
+        setType("情感");
+        return;
+      case "seekHelp":
+        setType("求助");
+        return;
+      default:
+        return;
+    }
+  }, []);
   return (
-    <div>
+    <div className="mb-2">
       {comment.poster.id === currentUser.id ? (
         <div
           className={`${
-            openSelect ? "h-12" : "h-5"
+            openSelect ? "h-14" : "h-5"
           } w-20 mt-1 flex flex-col items-center float-right overflow-hidden`}
         >
+          {openSelect ? (
+            <div
+              className="fixed top-0 left-0 blur-0 right-0 w-full h-full z-40"
+              onClick={() => {
+                setOpenSelect(false);
+              }}
+            ></div>
+          ) : null}
           <div
-            className="w-full h-5"
+            className="w-full h-5 z-50"
             onClick={() => setOpenSelect(!openSelect)}
           >
             <button className="float-right">
@@ -36,7 +70,14 @@ export const CommentItem = ({
               </svg>
             </button>
           </div>
-          <button className="border rounded px-5 shadow-sm">删除</button>
+          <button
+            className=" border-2 rounded px-5 shadow-sm z-50 mt-1"
+            onClick={() => {
+              console.log("删除");
+            }}
+          >
+            删除
+          </button>
         </div>
       ) : null}
       <div className="flex">
@@ -50,7 +91,14 @@ export const CommentItem = ({
 
         <div>
           <p>{comment.poster.nickname}</p>
-          <p className="text-gray-600 text-sm">{comment.time}</p>
+          <p className="text-gray-600 text-sm">
+            {comment.time}
+            {isReply ? null : (
+              <span className="text-sm opacity-70 float-right ml-4">
+                #{type}#
+              </span>
+            )}
+          </p>
         </div>
       </div>
 

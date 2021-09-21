@@ -40,7 +40,8 @@
         "avatar": "https://z3.ax1x.com/2021/09/05/hReKSA.jpg",
         "id": 1
       },
-      "content": "林科大树洞测试mock顶层留言1",
+      "type": "life",
+      "content": "生活琐事顶层留言1",
       "replyTo": null,
       "time": "6天前",
       "likes": 50,
@@ -82,7 +83,8 @@
         "nickname": "Eliauk",
         "avatar": "https://z3.ax1x.com/2021/09/17/4MTXJ1.jpg"
       },
-      "content": "林科大树洞测试mock顶层留言2",
+      "type": "relationship",
+      "content": "寝室关系顶层留言2",
       "replyTo": null,
       "time": "6天前",
       "likes": 21,
@@ -96,7 +98,8 @@
         "nickname": "苍术",
         "avatar": "https://z3.ax1x.com/2021/09/05/hReKSA.jpg"
       },
-      "content": "林科大树洞测试mock顶层留言3",
+      "type": "emotion",
+      "content": "情感顶层留言3",
       "replyTo": null,
       "time": "刚刚",
       "dislikes": 1,
@@ -110,7 +113,8 @@
         "nickname": "苍术",
         "avatar": "https://z3.ax1x.com/2021/09/05/hReKSA.jpg"
       },
-      "content": "林科大树洞测试mock顶层留言4",
+      "type": "seekHelp",
+      "content": "求助顶层留言4",
       "replyTo": null,
       "time": "刚刚",
       "dislikes": 1,
@@ -124,7 +128,8 @@
         "avatar": "https://z3.ax1x.com/2021/09/05/hReKSA.jpg",
         "id": 1
       },
-      "content": "林科大树洞测试mock顶层留言5",
+      "type": "seekHelp",
+      "content": "求助顶层留言5",
       "replyTo": null,
       "time": "6天前",
       "likes": 36,
@@ -166,7 +171,8 @@
         "nickname": "苍术",
         "avatar": "https://z3.ax1x.com/2021/09/05/hReKSA.jpg"
       },
-      "content": "123456",
+      "type": "seekHelp",
+      "content": "求助顶层留言6",
       "replyTo": null,
       "time": "刚刚",
       "dislikes": 0,

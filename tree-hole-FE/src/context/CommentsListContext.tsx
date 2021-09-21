@@ -3,11 +3,19 @@ import { apiUrl } from "../utils/apiUrl";
 import { useLoad } from "./Load";
 import { UserProps } from "./UserContext";
 
+// 留言类型的类型定义
+export type CommentType =
+  | "life"
+  | "relationship"
+  | "emotion"
+  | "seekHelp"
+  | "all";
 // 留言的类型定义
 export interface CommentProp {
   id?: number;
   poster: UserProps;
   content: string;
+  type: CommentType;
   time: string;
   likes: number;
   dislikes: number;
@@ -29,8 +37,13 @@ export interface ReplyProp {
 const CommentsListContext = React.createContext<
   | {
       commentsList: CommentProp[] | null;
-      getCommentsList: () => void;
-      createNewComment: (comment: CommentProp) => void;
+      commentListType: CommentType;
+      getCommentsList: (type?: CommentType) => Promise<CommentProp[]>;
+      createNewComment: (comment: CommentProp) => Promise<string>;
+      setCommentsList: React.Dispatch<
+        React.SetStateAction<CommentProp[] | null>
+      >;
+      setCommentListType: React.Dispatch<React.SetStateAction<CommentType>>;
     }
   | undefined
 >(undefined);
@@ -42,58 +55,64 @@ CommentsListContext.displayName = "CommentsListContext";
 export const CommentListProvider = ({ children }: { children: ReactNode }) => {
   // 定义一个state属性用于存评论列表
   const [commentsList, setCommentsList] = useState<null | CommentProp[]>(null);
+  // 定义一个属性用于存储当前列表的类型
+  const [commentListType, setCommentListType] = useState<CommentType>("all");
 
   // 从LoadProvider中取出isLoading判断是否在加载
   const { setIsLoading } = useLoad();
-  // 获取树洞留言列表
-  const getCommentsList = () => {
+  // 获取指定树洞留言列表
+  const getCommentsList = (type: CommentType = "all") => {
     setIsLoading(true);
-    fetch(`${apiUrl}comment`)
-      .then(async (response) => {
-        // 请求成功
-        if (response.ok) {
-          // 获取树洞留言列表
-          const list: CommentProp[] = await response.json();
-          setIsLoading(false);
-          setCommentsList(list);
-          return Promise.resolve(response.statusText);
-        } else {
-          return Promise.reject(response.status);
-        }
-      })
-      .catch((err) => {
-        console.error(`GET请求链接${apiUrl} 发生${err}错误`);
-      });
+    return fetch(
+      type === "all" ? `${apiUrl}comment` : `${apiUrl}comment?type=${type}`
+    ).then(async (response) => {
+      // 请求成功
+      if (response.ok) {
+        // 获取树洞留言列表
+        const list: CommentProp[] = await response.json();
+        setIsLoading(false);
+        return Promise.resolve(list);
+      } else {
+        setIsLoading(false);
+        return Promise.reject(await response.json());
+      }
+    });
   };
   // 发布新的树洞留言
   const createNewComment = (newComment: CommentProp) => {
     setIsLoading(true);
-    fetch(`${apiUrl}comment`, {
+    return fetch(`${apiUrl}comment`, {
       method: "POST",
       headers: {
         // 类型为json
         "Content-Type": "application/json",
       },
       body: JSON.stringify(newComment),
-    })
-      .then(async (response) => {
-        // 请求成功
-        if (response.ok) {
-          // 重新请求一次留言列表
-          getCommentsList();
-          return Promise.resolve(response.statusText);
-        } else {
-          return Promise.reject(response.status);
-        }
-      })
-      .catch((err) => {
-        console.log(`POST请求链接${apiUrl} 发生${err}错误`);
-      });
+    }).then(async (response) => {
+      // 请求成功
+      if (response.ok) {
+        // 重新请求一次留言列表
+        getCommentsList().then((list) => {
+          setCommentsList(list);
+          setCommentListType("all");
+        });
+        return Promise.resolve(response.statusText);
+      } else {
+        return Promise.reject(response.status);
+      }
+    });
   };
   return (
     <CommentsListContext.Provider
       children={children}
-      value={{ commentsList, getCommentsList, createNewComment }}
+      value={{
+        commentsList,
+        commentListType,
+        getCommentsList,
+        createNewComment,
+        setCommentsList,
+        setCommentListType,
+      }}
     />
   );
 };
