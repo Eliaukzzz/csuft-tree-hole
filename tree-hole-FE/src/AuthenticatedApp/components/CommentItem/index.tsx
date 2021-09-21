@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { NavLink } from "react-router-dom";
-import { CommentProp } from "../../../context/CommentsListContext";
+import { CommentProp, ReplyProp } from "../../../context/CommentsListContext";
 import { useUser } from "../../../context/UserContext";
 
 // 树洞留言和留言回复内容组件
@@ -8,7 +8,7 @@ export const CommentItem = ({
   comment,
   isReply = false,
 }: {
-  comment: CommentProp;
+  comment: CommentProp | ReplyProp;
   isReply: boolean;
 }) => {
   const [openSelect, setOpenSelect] = useState<boolean>(false);

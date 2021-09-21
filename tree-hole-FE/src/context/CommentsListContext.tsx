@@ -3,16 +3,26 @@ import { apiUrl } from "../utils/apiUrl";
 import { useLoad } from "./Load";
 import { UserProps } from "./UserContext";
 
-// 留言和留言评论的类型定义
+// 留言的类型定义
 export interface CommentProp {
   id?: number;
   poster: UserProps;
   content: string;
-  replyTo: null | number;
   time: string;
   likes: number;
   dislikes: number;
-  replies: null | CommentProp[];
+  replies: null | ReplyProp[];
+}
+
+// 留言评论的类型定义
+export interface ReplyProp {
+  id?: number;
+  replyTo: number;
+  poster: UserProps;
+  content: string;
+  time: string;
+  likes: number;
+  dislikes: number;
 }
 
 // 创建留言和获取留言评论函数的context
