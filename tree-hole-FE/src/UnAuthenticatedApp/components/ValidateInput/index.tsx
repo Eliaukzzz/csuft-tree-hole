@@ -15,7 +15,7 @@ export const ValidateInput = ({
   name: string;
   className: string;
   placeholder?: string;
-  validateType: "email" | "password" | "nickname";
+  validateType: "email" | "password" | "nickname" | "verifyPassword";
   value: string;
   thisPass: boolean;
   setThisPass: React.Dispatch<React.SetStateAction<boolean>>;
@@ -28,7 +28,7 @@ export const ValidateInput = ({
       case "email":
         if (emailReg.test(value)) {
           setThisPass(true);
-          setMessage("邮箱格式正确");
+          setMessage("");
         } else if (value === "") {
           setMessage("");
         } else {
@@ -39,12 +39,37 @@ export const ValidateInput = ({
       case "password":
         if (passwordReg.test(value)) {
           setThisPass(true);
-          setMessage("密码格式正确");
+          setMessage("");
         } else if (value === "") {
           setMessage("");
         } else {
           setThisPass(false);
-          setMessage("密码长度过短");
+          setMessage("密码长度应在6和15之间");
+        }
+        return;
+      case "nickname":
+        if (nickNameReg.test(value)) {
+          setThisPass(true);
+          setMessage("");
+        } else if (value === "") {
+          setMessage("");
+        } else if (value.length < 2 || value.length > 8) {
+          setThisPass(false);
+          setMessage("昵称长度应在2到8之间");
+        } else {
+          setThisPass(false);
+          setMessage("昵称不能有违法字符");
+        }
+        return;
+      case "verifyPassword":
+        if (passwordReg.test(value)) {
+          setThisPass(true);
+          setMessage("");
+        } else if (value === "") {
+          setMessage("");
+        } else {
+          setThisPass(false);
+          setMessage("密码长度应在6和15之间");
         }
         return;
       default:
@@ -69,7 +94,7 @@ export const ValidateInput = ({
         }}
       />
       <div
-        className={`flex items-center pl-3 h-6 ${
+        className={`flex items-center pl-3 h-2 w-48 ${
           thisPass ? "text-green-theme-green" : "text-red-500"
         }`}
       >
@@ -80,5 +105,6 @@ export const ValidateInput = ({
 };
 
 const emailReg =
-  /^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
-const passwordReg = /.{6,}/;
+  /(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))/;
+const passwordReg = /^.{6,15}$/;
+const nickNameReg = /^[\u4e00-\u9fa5a-zA-Z0-9_-]{2,8}$/;
