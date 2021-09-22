@@ -7,7 +7,6 @@ export interface UserProps {
   isLogin?: boolean;
   id?: number;
   nickname?: string;
-  avatar?: string;
   email?: string;
   favorite?: number[];
   hate?: number[];

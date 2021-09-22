@@ -5,7 +5,6 @@
       "email": "2421398452@qq.com",
       "gender": "男",
       "password": "123456",
-      "avatar": "https://z3.ax1x.com/2021/09/05/hReKSA.jpg",
       "favorite": [
         1,
         2
@@ -22,7 +21,6 @@
       "email": "2421398452@qq.com",
       "gender": "男",
       "password": "123456",
-      "avatar": "https://z3.ax1x.com/2021/09/17/4MTXJ1.jpg",
       "favorite": [
         1,
         2
@@ -37,7 +35,6 @@
   "comment": [{
       "poster": {
         "nickname": "苍术",
-        "avatar": "https://z3.ax1x.com/2021/09/05/hReKSA.jpg",
         "id": 1
       },
       "type": "life",
@@ -49,8 +46,7 @@
       "replies": [{
           "poster": {
             "id": 2,
-            "nickname": "Eliauk",
-            "avatar": "https://z3.ax1x.com/2021/09/17/4MTXJ1.jpg"
+            "nickname": "Eliauk"
           },
           "content": "林科大树洞测试mock顶层留言回复1",
           "replyTo": 1,
@@ -63,7 +59,6 @@
         {
           "poster": {
             "nickname": "苍术",
-            "avatar": "https://z3.ax1x.com/2021/09/05/hReKSA.jpg",
             "id": 1
           },
           "content": "林科大树洞测试mock顶层留言回复2",
@@ -80,8 +75,7 @@
     {
       "poster": {
         "id": 2,
-        "nickname": "Eliauk",
-        "avatar": "https://z3.ax1x.com/2021/09/17/4MTXJ1.jpg"
+        "nickname": "Eliauk"
       },
       "type": "relationship",
       "content": "寝室关系顶层留言2",
@@ -95,8 +89,7 @@
     {
       "poster": {
         "id": 1,
-        "nickname": "苍术",
-        "avatar": "https://z3.ax1x.com/2021/09/05/hReKSA.jpg"
+        "nickname": "苍术"
       },
       "type": "emotion",
       "content": "情感顶层留言3",
@@ -110,8 +103,7 @@
     {
       "poster": {
         "id": 1,
-        "nickname": "苍术",
-        "avatar": "https://z3.ax1x.com/2021/09/05/hReKSA.jpg"
+        "nickname": "苍术"
       },
       "type": "seekHelp",
       "content": "求助顶层留言4",
@@ -125,7 +117,6 @@
     {
       "poster": {
         "nickname": "苍术",
-        "avatar": "https://z3.ax1x.com/2021/09/05/hReKSA.jpg",
         "id": 1
       },
       "type": "seekHelp",
@@ -137,8 +128,7 @@
       "replies": [{
           "poster": {
             "id": 2,
-            "nickname": "Eliauk",
-            "avatar": "https://z3.ax1x.com/2021/09/17/4MTXJ1.jpg"
+            "nickname": "Eliauk"
           },
           "content": "林科大树洞测试mock顶层留言回复3",
           "replyTo": 1,
@@ -151,7 +141,6 @@
         {
           "poster": {
             "nickname": "苍术",
-            "avatar": "https://z3.ax1x.com/2021/09/05/hReKSA.jpg",
             "id": 3
           },
           "content": "林科大树洞测试mock顶层留言回复4",
@@ -168,8 +157,7 @@
     {
       "poster": {
         "id": 1,
-        "nickname": "苍术",
-        "avatar": "https://z3.ax1x.com/2021/09/05/hReKSA.jpg"
+        "nickname": "苍术"
       },
       "type": "seekHelp",
       "content": "求助顶层留言6",

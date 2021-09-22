@@ -11,13 +11,13 @@ function App() {
   // 获取登录用户信息
   const { currentUser } = useUser();
   return (
-    <>
-      <main className="p-4 min-h-screen mx-auto min-w-app-mw bg-bg">
+    <div className="bg-bg min-h-screen ">
+      <main className="p-4 mx-auto min-w-app-mw font-sans">
         {/* loading组件 */}
         {isLoading ? <Loading /> : null}
         {currentUser.isLogin ? <AuthenticatedApp /> : <UnAuthenticatedApp />}
       </main>
-    </>
+    </div>
   );
 }
 

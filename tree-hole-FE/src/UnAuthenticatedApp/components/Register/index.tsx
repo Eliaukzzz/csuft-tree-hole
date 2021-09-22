@@ -1,5 +1,4 @@
 import React, { FormEvent, useEffect, useState } from "react";
-import { AvatarUploader } from "../AvatarUploader";
 import { ValidateInput } from "../ValidateInput";
 import { useUser } from "../../../context/UserContext";
 export const Register = ({
@@ -77,17 +76,8 @@ export const Register = ({
   // 拖拽文件
   return (
     <div className="flex flex-col justify-center items-center rounded-xl bg-white shadow-lg p-10">
-      <h2 className="text-2xl text-green-theme-green">新用户注册</h2>
+      <h2 className="text-2xl text-green-theme-green mb-4">新用户注册</h2>
       <form onSubmit={handleSubmit}>
-        {/* 上传头像 */}
-        <div className="flex flex-row items-center px-2 text-gary-theme-gary">
-          <label htmlFor="avatar" className="w-1/2 pl-3">
-            请上传头像
-          </label>
-          <div className="w-1/2">
-            <AvatarUploader />
-          </div>
-        </div>
         {/* 上传昵称 */}
         <ValidateInput
           type="text"

@@ -11,7 +11,6 @@ module.exports = (req, res, next) => {
           email: "2421398452@qq.com",
           gender: "男",
           password: "123456",
-          avatar: "https://z3.ax1x.com/2021/09/05/hReKSA.jpg",
           favorite: [1, 2],
           hate: [3, 4],
           token:

@@ -26,16 +26,6 @@ export const Account = () => {
     <div className="flex items-center flex-col pt-10 min-w-account-mw">
       <table className="grid grid-cols-1 w-2/3 max-w-md auto-rows-auto">
         <tbody>
-          <tr className="grid grid-cols-2 items-center border-b-2 py-3 pl-3 pr-1">
-            <td>头像</td>
-            <td>
-              <img
-                className="w-12 h-12 rounded-full float-right"
-                src={pageUser.avatar}
-                alt=""
-              />
-            </td>
-          </tr>
           <tr className="grid grid-cols-2 items-center border-b-2 py-3 px-3">
             <td>昵称</td>
             <td className="text-right">{pageUser.nickname}</td>

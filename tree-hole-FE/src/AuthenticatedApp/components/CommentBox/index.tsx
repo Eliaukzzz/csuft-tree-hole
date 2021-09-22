@@ -31,7 +31,6 @@ export const CommentBox = ({
       poster: {
         id: 1,
         nickname: "苍术",
-        avatar: "https://z3.ax1x.com/2021/09/05/hReKSA.jpg",
       },
       content: newComment,
       time: "刚刚",
@@ -84,7 +83,7 @@ export const CommentBox = ({
         <fieldset className="pb-3">
           <button
             type="submit"
-            className="px-4 py-1 bg-green-theme-green rounded text-white"
+            className="px-4 py-1 my-2 bg-green-theme-green rounded text-white"
           >
             发布
           </button>

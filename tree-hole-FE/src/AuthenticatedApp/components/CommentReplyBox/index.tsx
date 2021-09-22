@@ -22,7 +22,7 @@ export const CommentReplyBox = () => {
           onClick={() => {
             setOnReply(!onReply);
           }}
-          className="text-green-theme-green pb-8"
+          className="text-green-theme-green pb-3"
         >
           {" "}
           回复{" "}

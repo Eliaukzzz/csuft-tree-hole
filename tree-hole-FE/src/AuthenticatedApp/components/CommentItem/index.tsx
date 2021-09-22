@@ -81,22 +81,16 @@ export const CommentItem = ({
         </div>
       ) : null}
       <div className="flex">
-        <NavLink to={`/account/${comment.poster.id}`}>
-          <img
-            src={comment.poster.avatar}
-            alt=""
-            className="w-12 h-12 mr-4 rounded-full"
-          />
-        </NavLink>
-
         <div>
-          <p>{comment.poster.nickname}</p>
+          <NavLink to={`/account/${comment.poster.id}`}>
+            <p className="text-green-theme-green text-xl mb-2 mt-3">
+              {comment.poster.nickname}
+            </p>
+          </NavLink>
           <p className="text-gray-600 text-sm">
             {comment.time}
             {isReply ? null : (
-              <span className="text-sm float-right ml-4 text-green-theme-green">
-                #{type}#
-              </span>
+              <span className="text-sm float-right ml-4">#{type}#</span>
             )}
           </p>
         </div>

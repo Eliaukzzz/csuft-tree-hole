@@ -1,14 +1,12 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import { CommentBox } from "../../AuthenticatedApp/components/CommentBox";
 import { CommentItem } from "../../AuthenticatedApp/components/CommentItem";
 import { CommentReplyBox } from "../../AuthenticatedApp/components/CommentReplyBox";
 import { CommentTypeBox } from "../../AuthenticatedApp/components/CommentTypeBox";
 import { ReplyCommentContainer } from "../../AuthenticatedApp/components/ReplyCommentContainer";
 import { useCommentsList } from "../../context/CommentsListContext";
-import { useShowNav } from "../../context/ShowNav";
 
 export const Home = () => {
-  const { showNav } = useShowNav();
   // 从CommentsListProvider中获得留言列表
   const {
     commentsList,
@@ -24,7 +22,7 @@ export const Home = () => {
     });
   }, [commentListType]);
   return (
-    <div>
+    <div className="wrapper">
       {/* 留言回复输入框 */}
       <CommentBox children="" isTopCommentBox={true} />
       {/* 树洞留言区 */}
@@ -35,7 +33,7 @@ export const Home = () => {
         />
         {commentsList?.map((comment) => {
           return (
-            <div key={comment.id}>
+            <div key={comment.id} className="bg-white">
               <CommentItem
                 isReply={false}
                 comment={comment}

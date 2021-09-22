@@ -18,7 +18,7 @@ export const Header = () => {
         onClick={() => {
           setShowNav(false);
         }}
-        className="py-6 px-6 border-gary-theme-gary border-b-2 block"
+        className="my-6 mx-6 border-gary-theme-gary border-b-2 inline-block"
         to={"/"}
       >
         林科大树洞
