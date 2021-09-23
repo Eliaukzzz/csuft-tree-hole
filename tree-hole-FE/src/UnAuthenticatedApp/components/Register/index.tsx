@@ -19,6 +19,10 @@ export const Register = ({
   const [nickname, setNickname] = useState<string>("");
   const [nicknamePass, setNicknamePass] = useState<boolean>(false);
 
+  // 判断性别单选是否选中
+  type GenderType = "male" | "female" | "secret"; // 性别三个选项
+  const [gender, setGender] = useState<GenderType>("secret");
+
   // 邮箱 和 判断邮箱通过属性
   const [email, setEmail] = useState<string>("");
   const [emailPass, setEmailPass] = useState<boolean>(false);
@@ -90,6 +94,42 @@ export const Register = ({
           model={setNickname}
           setThisPass={setNicknamePass}
         />
+        <div className="p-2 text-gary-theme-gary">
+          性别：
+          <label className="ml-2">
+            <input
+              type="radio"
+              onChange={(event) => {
+                setGender(event.target.value as GenderType);
+              }}
+              checked={gender === "male"}
+              value="male"
+            />{" "}
+            男
+          </label>
+          <label className="ml-2">
+            <input
+              type="radio"
+              onChange={(event) => {
+                setGender(event.target.value as GenderType);
+              }}
+              checked={gender === "female"}
+              value="female"
+            />{" "}
+            女
+          </label>
+          <label className="ml-2">
+            <input
+              type="radio"
+              onChange={(event) => {
+                setGender(event.target.value as GenderType);
+              }}
+              checked={gender === "secret"}
+              value="secret"
+            />{" "}
+            保密
+          </label>
+        </div>
         {/* 上传邮箱 */}
         <ValidateInput
           type="text"
