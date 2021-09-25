@@ -3,7 +3,8 @@ import { Route, Switch } from "react-router";
 import { Header } from "./components/Header";
 import { Account } from "../pages/Account";
 import { Home } from "../pages/Home";
-
+import { Comments } from "../pages/Comments";
+import { Favorites } from "../pages/Favorties";
 // 状态为已经登录的界面
 export const AuthenticatedApp = () => {
   return (
@@ -17,6 +18,10 @@ export const AuthenticatedApp = () => {
           <Route path="/" exact component={Home} />
           {/* 用户信息页面 */}
           <Route path="/account/:id" component={Account} />
+          {/* 用户发布页面 */}
+          <Route path="/comments" component={Comments} />
+          {/* 用户喜欢页面 */}
+          <Route path="/favorites" component={Favorites} />
         </Switch>
       </div>
     </div>

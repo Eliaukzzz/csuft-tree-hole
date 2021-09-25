@@ -34,22 +34,24 @@ export const Header = () => {
         >
           个人信息
         </NavLink>
-        <a
+        <NavLink
           onClick={() => {
             setShowNav(false);
           }}
           className="py-2 px-6 border-gary-theme-gary border-b-2 lg:border-b-2 lg:border-r-2 text-base w-full text-center bg-gray-600 hover:bg-green-theme-green transition-colors duration-500"
+          to={'comments'}
         >
           我发布的
-        </a>
-        <a
+        </NavLink>
+        <NavLink
           onClick={() => {
             setShowNav(false);
           }}
           className="py-2 px-6 border-gary-theme-gary border-b-2 lg:border-b-2 lg:border-r-2 text-base w-full text-center bg-gray-600 hover:bg-green-theme-green transition-colors duration-500"
+          to={'favorites'}
         >
           我喜欢的
-        </a>
+        </NavLink>
         <a
           onClick={() => {
             setShowNav(false);
