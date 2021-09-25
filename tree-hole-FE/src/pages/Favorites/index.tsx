@@ -1,27 +1,38 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import {  useUser } from "../../context/UserContext";
+import { useUser } from "../../context/UserContext";
 import { CommentItem } from "../../AuthenticatedApp/components/CommentItem";
 import { CommentReplyBox } from "../../AuthenticatedApp/components/CommentReplyBox";
 import { ReplyCommentContainer } from "../../AuthenticatedApp/components/ReplyCommentContainer";
-import { useCommentsList } from "../../context/CommentsListContext";
-export const Favorites=() =>{
-const { currentUser } = useUser();
+import {
+  CommentProp,
+  useCommentsList,
+} from "../../context/CommentsListContext";
+export const Favorites = () => {
+  const { currentUser } = useUser();
   // 接收对应的用户id
-  const { id }: { id: string } = useParams<any>();
-  const { commentsList, getCommentsList } = useCommentsList();
+  const { id }: { id: string } = useParams();
+  const [favoriteList, setFavoriteList] = useState<CommentProp[]>();
+  const { getCommentsList } = useCommentsList();
   useEffect(() => {
-    if (currentUser.id === +id) {
-      // 如果是当前登录获取留言列表
-      getCommentsList();
-    } 
+    getCommentsList().then((response) => {
+      setFavoriteList(response);
+    });
   }, []);
-    return (
-        <div className="px-5 mt-5">
-        {commentsList?.filter((comment )=>{return currentUser.favorite?.includes(comment.id as number)}).map((comment) => {
+  return (
+    <div className="px-5 mt-5">
+      {favoriteList
+        ?.filter((comment) => {
+          return currentUser.favorite?.includes(comment.id as number);
+        })
+        .map((comment) => {
           return (
             <div key={comment.id}>
-              <CommentItem isReply={false} comment={comment} commentType={comment.type} />
+              <CommentItem
+                isReply={false}
+                comment={comment}
+                commentType={comment.type}
+              />
               {comment?.replies ? (
                 <ReplyCommentContainer>
                   {comment.replies.map((reply) => {
@@ -39,6 +50,6 @@ const { currentUser } = useUser();
             </div>
           );
         })}
-        </div>
-    )
-}
+    </div>
+  );
+};

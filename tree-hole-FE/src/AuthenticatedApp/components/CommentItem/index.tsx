@@ -110,8 +110,8 @@ export const CommentItem = ({
           >
             <button className="pl-3 text-lg hover:text-red-500">
               &#xe670;
+              <span className="px-1">{comment.likes}</span>
             </button>
-            <span className="px-1">{comment.likes}</span>
           </div>
           <div
             className={`${
@@ -124,8 +124,8 @@ export const CommentItem = ({
           >
             <button className="pl-3 text-lg hover:text-red-500">
               &#xe666;
+              <span className="px-1">{comment.dislikes}</span>
             </button>
-            <span className="px-1">{comment.dislikes}</span>
           </div>
         </div>
       )}

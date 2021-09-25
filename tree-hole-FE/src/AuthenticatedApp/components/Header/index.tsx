@@ -39,7 +39,7 @@ export const Header = () => {
             setShowNav(false);
           }}
           className="py-2 px-6 border-gary-theme-gary border-b-2 lg:border-b-2 lg:border-r-2 text-base w-full text-center bg-gray-600 hover:bg-green-theme-green transition-colors duration-500"
-          to={'comments'}
+          to={`/comments/${currentUser.id}`}
         >
           我发布的
         </NavLink>
@@ -48,7 +48,7 @@ export const Header = () => {
             setShowNav(false);
           }}
           className="py-2 px-6 border-gary-theme-gary border-b-2 lg:border-b-2 lg:border-r-2 text-base w-full text-center bg-gray-600 hover:bg-green-theme-green transition-colors duration-500"
-          to={'favorites'}
+          to={`/favorites/${currentUser.id}`}
         >
           我喜欢的
         </NavLink>

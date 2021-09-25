@@ -6,7 +6,7 @@ export const Account = () => {
   // 获取当前登录的用户信息
   const { currentUser, getUserInfo, logout } = useUser();
   // 接收对应的用户id
-  const { id }: { id: string } = useParams<any>();
+  const { id }: { id: string } = useParams();
   // 获取对应用户信息
   const [pageUser, setPageUser] = useState<UserProps>({});
   // 挂载该页面的时候获得对应的用户信息
