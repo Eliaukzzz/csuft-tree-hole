@@ -39,6 +39,8 @@ export const CommentItem = ({
         return;
     }
   }, []);
+  // todo 点赞
+  // todo 删除
   return (
     <div className="mb-2">
       {comment.poster.id === currentUser.id ? (

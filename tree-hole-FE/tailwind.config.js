@@ -1,6 +1,10 @@
 module.exports = {
   darkMode: false, // or 'media' or 'class'
   theme: {
+    fontFamily: {
+      sans: ["monospace", "Graphik", "sans-serif"],
+      serif: ["Merriweather", "serif"],
+    },
     extend: {
       minHeight: {
         "main-h": "96vh",

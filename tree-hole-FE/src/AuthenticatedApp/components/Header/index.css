@@ -1,0 +1,69 @@
+h1 {
+  height: 1.875rem;
+  position: relative;
+}
+
+h1::after {
+  content: '';
+  display: inline-block;
+  position: absolute;
+  width: 0.11rem;
+  right: -10px;
+  height: 2rem;
+  background-color: #fff;
+  border-radius: 2px;
+}
+
+h1.ended::after {
+  animation: 1.1s cursor steps(2, jump-none) infinite;
+}
+
+@keyframes cursor {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+h1 span.start {
+  --delay: 10s;
+  display: inline-block;
+  overflow: hidden;
+  width: 0;
+  animation: 0.1s text-in forwards;
+  animation-delay: var(--delay);
+  transform: translateZ(0);
+}
+
+@keyframes text-in {
+  from {
+    width: 0ch;
+  }
+
+  to {
+    width: 2ch;
+  }
+}
+
+h1 span.end {
+  --delay: 10s;
+  display: inline-block;
+  overflow: hidden;
+  width: 2;
+  animation: 0.1s text-out forwards;
+  animation-delay: var(--delay);
+  transform: translateZ(0);
+}
+
+@keyframes text-out {
+  from {
+    width: 2ch;
+  }
+
+  to {
+    width: 0ch;
+  }
+}
