@@ -6,7 +6,7 @@ import {
   ReplyProp,
 } from "../../../context/CommentsListContext";
 import { useUser } from "../../../context/UserContext";
-import { Capture } from "../CaptureItem";
+import { CaptureItem } from "../CaptureItem";
 
 // 树洞留言和留言回复内容组件
 export const CommentItem = ({
@@ -46,8 +46,16 @@ export const CommentItem = ({
     <div className="mb-2">
       <div className="float-right mb-2 mt-3">
         {comment.poster.id === currentUser.id ? (
-          <button className="iconfont text-xl text-red-500">&#xe67e;</button>
+          <button className="iconfont text-xl text-red-500">&#xe665;</button>
         ) : null}
+        <button
+          onClick={() => {
+            setOnCapture(true);
+          }}
+          className="iconfont pl-3 text-base hover:text-red-500"
+        >
+          &#xe66a;
+        </button>
       </div>
       <div className="flex">
         <div>
@@ -78,7 +86,7 @@ export const CommentItem = ({
             }`}
           >
             <button className="pl-3 text-lg hover:text-red-500">
-              <span className="iconfont">&#xe670;</span>
+              <span className="iconfont">&#xe673;</span>
               <span className="px-1">{comment.likes}</span>
             </button>
           </div>
@@ -96,18 +104,9 @@ export const CommentItem = ({
               <span className="px-1">{comment.dislikes}</span>
             </button>
           </div>
-          <div>
-            <button
-              onClick={() => {
-                setOnCapture(true);
-              }}
-              className="iconfont pl-3 text-base hover:text-red-500"
-            >
-              &#xe60b;
-            </button>
-          </div>
+          <div></div>
           {onCapture ? (
-            <Capture
+            <CaptureItem
               comment={comment as CommentProp}
               setOnCapture={setOnCapture}
             />
