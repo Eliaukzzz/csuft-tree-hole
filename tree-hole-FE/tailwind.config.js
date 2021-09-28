@@ -8,6 +8,8 @@ module.exports = {
     extend: {
       minHeight: {
         "main-h": "96vh",
+        "app-mh": "7.5rem",
+        "card-mh": "25rem",
       },
       minWidth: {
         "app-mw": "17.5rem",
@@ -37,6 +39,7 @@ module.exports = {
         "nav-shade": "15.875rem",
         // navBar 展开后pc端波浪线高度
         "pc-shade": "8rem",
+        "card-bg-w-m": "16rem",
       },
       backgroundImage: (theme) => ({
         bg: "url('./src/assets/img/bg.png')",
