@@ -1,9 +1,8 @@
 @font-face {
-  font-family: "iconfont";
-  /* Project id 2810289 */
-  src: url('iconfont.woff2?t=1632034164300') format('woff2'),
-    url('iconfont.woff?t=1632034164300') format('woff'),
-    url('iconfont.ttf?t=1632034164300') format('truetype');
+  font-family: "iconfont"; /* Project id 2810289 */
+  src: url('iconfont.woff2?t=1632842318324') format('woff2'),
+       url('iconfont.woff?t=1632842318324') format('woff'),
+       url('iconfont.ttf?t=1632842318324') format('truetype');
 }
 
 .iconfont {
@@ -12,6 +11,22 @@
   font-style: normal;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+
+.icon-back:before {
+  content: "\e667";
+}
+
+.icon-save:before {
+  content: "\e762";
+}
+
+.icon-yijianjieping-copy:before {
+  content: "\e60b";
+}
+
+.icon-delete:before {
+  content: "\e67e";
 }
 
 .icon-bad:before {
@@ -30,18 +45,3 @@
   content: "\e6e5";
 }
 
-.custom-shape-divider-top-1631711424 {
-  width: 100%;
-  overflow: hidden;
-  line-height: 0;
-}
-
-.custom-shape-divider-top-1631711424 svg {
-  display: block;
-  width: calc(100% + 1.3px);
-  height: 33px;
-}
-
-.custom-shape-divider-top-1631711424 .shape-fill {
-  fill: #636C79;
-}

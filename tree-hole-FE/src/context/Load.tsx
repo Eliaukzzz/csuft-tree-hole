@@ -1,4 +1,5 @@
 import React, { ReactNode, useContext, useEffect, useState } from "react";
+import { useBanScroll, useCancelBanScroll } from "../utils/useScroll";
 
 // 建立load context
 const Load = React.createContext<{
@@ -11,29 +12,13 @@ Load.displayName = "Load";
 export const LoadProvider = ({ children }: { children: ReactNode }) => {
   //
   const [isLoading, setIsLoading] = useState<boolean>(false);
-  // 加载时禁止滚动
-  const handleScroll = (event: TouchEvent | WheelEvent) => {
-    event.preventDefault();
-  };
   // 加载时禁止，未加载时允许
   useEffect(() => {
     if (isLoading) {
-      document.body.addEventListener("touchmove", handleScroll, {
-        passive: false,
-      });
-      document.body.addEventListener("wheel", handleScroll, {
-        passive: false,
-      });
+      useBanScroll();
     }
     return () => {
-      // @ts-ignore
-      document.body.removeEventListener("touchmove", handleScroll, {
-        passive: true,
-      });
-      // @ts-ignore
-      document.body.removeEventListener("wheel", handleScroll, {
-        passive: true,
-      });
+      useCancelBanScroll();
     };
   }, [isLoading]);
   return (

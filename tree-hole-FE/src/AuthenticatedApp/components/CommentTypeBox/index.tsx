@@ -16,7 +16,7 @@ export const CommentTypeBox = ({
         onChange={(event) => {
           setListType(event.target.value as CommentType);
         }}
-        className="float-right grid grid-cols-5 text-right"
+        className="float-right grid grid-cols-5 text-center"
       >
         <option value="all">全部</option>
         <option value="life">生活琐事</option>
