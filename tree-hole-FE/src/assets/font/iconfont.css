@@ -1,8 +1,8 @@
 @font-face {
   font-family: "iconfont"; /* Project id 2810289 */
-  src: url('iconfont.woff2?t=1632842318324') format('woff2'),
-       url('iconfont.woff?t=1632842318324') format('woff'),
-       url('iconfont.ttf?t=1632842318324') format('truetype');
+  src: url('iconfont.woff2?t=1632853405376') format('woff2'),
+       url('iconfont.woff?t=1632853405376') format('woff'),
+       url('iconfont.ttf?t=1632853405376') format('truetype');
 }
 
 .iconfont {
@@ -13,32 +13,36 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
+.icon-ashbin:before {
+  content: "\e665";
+}
+
+.icon-close:before {
+  content: "\e668";
+}
+
+.icon-cut:before {
+  content: "\e66a";
+}
+
+.icon-download:before {
+  content: "\e66c";
+}
+
+.icon-good:before {
+  content: "\e673";
+}
+
+.icon-menu:before {
+  content: "\e677";
+}
+
 .icon-back:before {
   content: "\e667";
 }
 
-.icon-save:before {
-  content: "\e762";
-}
-
-.icon-yijianjieping-copy:before {
-  content: "\e60b";
-}
-
-.icon-delete:before {
-  content: "\e67e";
-}
-
 .icon-bad:before {
   content: "\e666";
-}
-
-.icon-favorite:before {
-  content: "\e66f";
-}
-
-.icon-fabulous:before {
-  content: "\e670";
 }
 
 .icon-liebiao5:before {

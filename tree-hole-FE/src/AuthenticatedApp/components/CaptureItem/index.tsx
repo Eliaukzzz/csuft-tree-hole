@@ -4,7 +4,7 @@ import { useBanScroll, useCancelBanScroll } from "../../../utils/useScroll";
 import { BackgroundUploader } from "../BackgroundUploader";
 import html2canvas from "html2canvas";
 
-export const Capture = ({
+export const CaptureItem = ({
   comment,
   setOnCapture,
 }: {
@@ -57,15 +57,15 @@ export const Capture = ({
         onClick={() => {
           setOnCapture(false);
         }}
-        className="iconfont absolute text-gary-theme-gary top-2 left-4 text-2xl"
+        className="iconfont absolute text-gary-theme-gary top-3 left-3 text-2xl"
       >
         &#xe667;
       </button>
       <button
         onClick={exportAsPicture}
-        className="iconfont absolute bottom-1 right-3 text-gary-theme-gary text-3xl"
+        className="iconfont absolute bottom-3 right-3 text-gary-theme-gary text-2xl"
       >
-        &#xe762;
+        &#xe66c;
       </button>
       <p className="bg-white text-green-theme-green shadow-2xl absolute top-6 py-2 px-4 rounded-xl">
         点击图片以切换背景图片
@@ -78,7 +78,7 @@ export const Capture = ({
         <BackgroundUploader />
         <div className="w-card-bg-w-m pt-3 relative min-h-app-mh mx-auto">
           <p className="text-lg w-full overflow-hidden pb-4">
-            我吼烦啊我吼烦啊我吼烦啊我吼烦啊我吼烦啊我吼烦啊我吼烦啊我吼烦啊我吼烦啊我吼烦啊我吼烦啊我吼烦啊我吼烦啊我吼烦啊我吼烦啊我吼烦啊我吼烦啊我吼烦啊我吼烦啊我吼烦啊我吼烦啊我吼烦啊我吼烦啊
+            {comment.content}
           </p>
           <p className="absolute bottom-0 right-0 pb-2 pr-2">
             ——{comment.poster.nickname}
