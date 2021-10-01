@@ -4,6 +4,8 @@ mysql> create table User(
     -> Email char(20) not null,                   
     -> Password char(30) not null,
     -> Avater longblob,
+    -> Favorite varchar(255),
+    -> Hate varchar(255),
     -> Sex char(5)
     -> );
 Query OK, 0 rows affected (0.04 sec)
@@ -18,7 +20,8 @@ mysql> create table Comment(
     -> Time datetime not null,
     -> Liking int, 
     -> Disliking int,
-    -> type char(15)
+    -> 
+    -> Replies varchar(255)
     -> );
 Query OK, 0 rows affected (0.07 sec)
 
@@ -37,70 +40,42 @@ mysql> create table Reply(
     -> );
 Query OK, 0 rows affected (0.03 sec)
 
-mysql> create table Favorite(
-    -> favoriteid int not null primary key auto_increment,
-    -> user_id int not null,
-    -> foreign key(user_id) references User(id)
-    -> on update cascade
-    -> on delete cascade,
-    -> comment_id int not null,
-    -> foreign key(user_id) references User(id)
-    -> on update cascade
-    -> on delete cascade,
-    -> canceled int not null
-    -> );
-Query OK, 0 rows affected (0.03 sec)
-
-mysql> create table Hate(
-    -> hateid int not null primary key auto_increment,
-    -> user_id int not null,
-    -> foreign key(user_id) references User(id)
-    -> on update cascade
-    -> on delete cascade,
-    -> comment_id int not null,
-    -> foreign key(user_id) references User(id)
-    -> on update cascade
-    -> on delete cascade,
-    -> canceled int not null
-    -> );
-Query OK, 0 rows affected (0.03 sec)
-
 mysql> show tables;
 +----------------------+
 | Tables_in_treeholedb |
 +----------------------+
 | comment              |
-| favorite             |
-| hate                 |
 | reply                |
 | user                 |
 +----------------------+
-5 rows in set (0.02 sec)
+3 rows in set (0.00 sec)
 
 mysql> desc user;
-+----------+----------+------+-----+---------+----------------+
-| Field    | Type     | Null | Key | Default | Extra          |
-+----------+----------+------+-----+---------+----------------+
-| id       | int      | NO   | PRI | NULL    | auto_increment |
-| name     | char(30) | NO   |     | NULL    |                |
-| email    | char(20) | NO   |     | NULL    |                |
-| password | char(30) | NO   |     | NULL    |                |
-| avater   | longblob | YES  |     | NULL    |                |
-| sex      | char(5)  | YES  |     | NULL    |                |
-+----------+----------+------+-----+---------+----------------+
-6 rows in set (0.01 sec)
++----------+--------------+------+-----+---------+----------------+
+| Field    | Type         | Null | Key | Default | Extra          |
++----------+--------------+------+-----+---------+----------------+
+| Id       | int          | NO   | PRI | NULL    | auto_increment |
+| Name     | char(30)     | NO   |     | NULL    |                |
+| Email    | char(20)     | NO   |     | NULL    |                |
+| Password | char(30)     | NO   |     | NULL    |                |
+| Avater   | longblob     | YES  |     | NULL    |                |
+| Favorite | varchar(255) | YES  |     | NULL    |                |
+| Hate     | varchar(255) | YES  |     | NULL    |                |
+| Sex      | char(5)      | YES  |     | NULL    |                |
++----------+--------------+------+-----+---------+----------------+
+8 rows in set (0.01 sec)
 
 mysql> desc comment;
 +-----------+--------------+------+-----+---------+----------------+
 | Field     | Type         | Null | Key | Default | Extra          |
 +-----------+--------------+------+-----+---------+----------------+
-| commentid | int          | NO   | PRI | NULL    | auto_increment |
+| Commentid | int          | NO   | PRI | NULL    | auto_increment |
 | user_id   | int          | NO   | MUL | NULL    |                |
-| content   | varchar(255) | NO   |     | NULL    |                |
-| time      | datetime     | NO   |     | NULL    |                |
-| liking    | int          | YES  |     | NULL    |                |
-| disliking | int          | YES  |     | NULL    |                |
-| type      | char(15)     | YES  |     | NULL    |                |
+| Content   | varchar(255) | NO   |     | NULL    |                |
+| Time      | datetime     | NO   |     | NULL    |                |
+| Liking    | int          | YES  |     | NULL    |                |
+| Disliking | int          | YES  |     | NULL    |                |
+| Replies   | varchar(255) | YES  |     | NULL    |                |
 +-----------+--------------+------+-----+---------+----------------+
 7 rows in set (0.00 sec)
 
@@ -108,32 +83,10 @@ mysql> desc reply;
 +---------------+--------------+------+-----+---------+----------------+
 | Field         | Type         | Null | Key | Default | Extra          |
 +---------------+--------------+------+-----+---------+----------------+
-| replyid       | int          | NO   | PRI | NULL    | auto_increment |
+| Replyid       | int          | NO   | PRI | NULL    | auto_increment |
 | user_id       | int          | NO   | MUL | NULL    |                |
 | comment_id    | int          | NO   | MUL | NULL    |                |
-| reply_content | varchar(255) | NO   |     | NULL    |                |
+| Reply_content | varchar(255) | NO   |     | NULL    |                |
 | Reply_time    | datetime     | NO   |     | NULL    |                |
 +---------------+--------------+------+-----+---------+----------------+
 5 rows in set (0.00 sec)
-
-mysql> desc favorite;
-+------------+------+------+-----+---------+----------------+
-| Field      | Type | Null | Key | Default | Extra          |
-+------------+------+------+-----+---------+----------------+
-| favoriteid | int  | NO   | PRI | NULL    | auto_increment |
-| user_id    | int  | NO   | MUL | NULL    |                |
-| comment_id | int  | NO   |     | NULL    |                |
-| canceled   | int  | NO   |     | NULL    |                |
-+------------+------+------+-----+---------+----------------+
-4 rows in set (0.00 sec)
-
-mysql> desc hate;
-+------------+------+------+-----+---------+----------------+
-| Field      | Type | Null | Key | Default | Extra          |
-+------------+------+------+-----+---------+----------------+
-| hateid     | int  | NO   | PRI | NULL    | auto_increment |
-| user_id    | int  | NO   | MUL | NULL    |                |
-| comment_id | int  | NO   |     | NULL    |                |
-| canceled   | int  | NO   |     | NULL    |                |
-+------------+------+------+-----+---------+----------------+
-4 rows in set (0.00 sec)
