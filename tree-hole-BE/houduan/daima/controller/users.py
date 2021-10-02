@@ -88,7 +88,7 @@ def login():
     result = user.find_by_email(email)
     if len(result) == 1 and result[0].password == password:
         session['islogin'] = 'true'
-        session['userid'] = result[0].id
+        session['id'] = result[0].id
         session['name'] = result[0].name
         session['email'] = email
         # 将cookie写入浏览器
