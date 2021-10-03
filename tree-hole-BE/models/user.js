@@ -9,7 +9,7 @@ exports.register = async (post) => {
     const result = await col.insertOne(post);
     return result.ops && result.ops[0];
   } catch (error) {
-    throw "添加新用户到数据库出错";
+    throw "该邮箱已经注册";
   }
 };
 
