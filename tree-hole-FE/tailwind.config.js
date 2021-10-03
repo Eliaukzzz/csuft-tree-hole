@@ -10,6 +10,7 @@ module.exports = {
         "main-h": "96vh",
         "app-mh": "7.5rem",
         "card-mh": "25rem",
+        "msg-mh": "2rem",
       },
       minWidth: {
         "app-mw": "17.5rem",

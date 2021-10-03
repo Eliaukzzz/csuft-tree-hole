@@ -62,13 +62,18 @@ export const Login = ({
         // 跳转到主页面
         history.push("/");
       })
-      .catch((err) => setErrMessage(err.message)); // 如果请求失败 报错
+      .catch((err) => {
+        setErrMessage(err.err);
+      }); // 如果请求失败 报错
   };
   return (
-    <div className="flex flex-col justify-center items-center rounded-xl bg-white shadow-lg p-10">
+    <div className="flex flex-col justify-center items-center rounded-xl bg-white shadow-lg p-10 w-80">
       <h2 className="text-3xl text-green-theme-green pb-3">林科大树洞</h2>
       <h2 className="text-2xl text-green-theme-green">用户登录</h2>
-      <form onSubmit={handleSubmit}>
+      <form
+        className="flex flex-col justify-center items-center"
+        onSubmit={handleSubmit}
+      >
         <ValidateInput
           type="text"
           name="email"
@@ -91,7 +96,7 @@ export const Login = ({
           model={setPassword}
           setThisPass={setPasswordPass}
         />
-        <div className="flex items-center h-8 pl-3 text-red-600">
+        <div className="flex items-center justify-center min-h-msg-mh  text-red-600 w-72">
           <p>{errMessage}</p>
         </div>
         <div className="grid gap-3 grid-rows-1 grid-cols-2">

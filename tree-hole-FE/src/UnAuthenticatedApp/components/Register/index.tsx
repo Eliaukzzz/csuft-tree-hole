@@ -1,11 +1,14 @@
 import React, { FormEvent, useEffect, useState } from "react";
 import { ValidateInput } from "../ValidateInput";
 import { useUser } from "../../../context/UserContext";
+import { useHistory } from "react-router";
 export const Register = ({
   setIsLogin,
 }: {
   setIsLogin: React.Dispatch<React.SetStateAction<boolean>>;
 }) => {
+  const { setCurrentUser, register } = useUser();
+  const history = useHistory();
   // 判断表单总体是否验证通过
   const [fromPassStatus, setFromPassStatus] = useState<boolean>(false);
 
@@ -76,12 +79,34 @@ export const Register = ({
   // 处理表单提交
   const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
+    // 如果表单验证不通过
+    if (!fromPassStatus) {
+      setErrMessage("输入信息格式有误");
+      return;
+    }
+    // 登录后获取返回的用户信息 设置当前用户
+    register({
+      nickname: nickname.trim(),
+      gender: gender,
+      email: email.trim(),
+      password: password.trim(),
+    })
+      .then((user) => {
+        // 设置当前登录的用户
+        setCurrentUser({ ...user, isLogin: true });
+        // 跳转到主页面
+        history.push("/");
+      })
+      .catch((err) => setErrMessage(err.err)); // 如果请求失败 报错
   };
   // 拖拽文件
   return (
     <div className="flex flex-col justify-center items-center rounded-xl bg-white shadow-lg p-10">
       <h2 className="text-2xl text-green-theme-green mb-4">新用户注册</h2>
-      <form onSubmit={handleSubmit}>
+      <form
+        className="flex flex-col justify-center items-center"
+        onSubmit={handleSubmit}
+      >
         {/* 上传昵称 */}
         <ValidateInput
           type="text"

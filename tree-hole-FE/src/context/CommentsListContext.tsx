@@ -1,5 +1,5 @@
 import React, { ReactNode, useContext, useState } from "react";
-import { apiUrl } from "../utils/apiUrl";
+// import { apiUrl } from "../utils/apiUrl";
 import { useLoad } from "./Load";
 import { UserProps } from "./UserContext";
 
@@ -63,25 +63,25 @@ export const CommentListProvider = ({ children }: { children: ReactNode }) => {
   // 获取指定树洞留言列表
   const getCommentsList = (type: CommentType = "all") => {
     setIsLoading(true);
-    return fetch(
-      type === "all" ? `${apiUrl}comment` : `${apiUrl}comment?type=${type}`
-    ).then(async (response) => {
-      // 请求成功
-      if (response.ok) {
-        // 获取树洞留言列表
-        const list: CommentProp[] = await response.json();
-        setIsLoading(false);
-        return Promise.resolve(list);
-      } else {
-        setIsLoading(false);
-        return Promise.reject(await response.json());
+    return fetch(type === "all" ? "/api/" : `/api?type=${type}/`).then(
+      async (response) => {
+        // 请求成功
+        if (response.ok) {
+          // 获取树洞留言列表
+          const list: CommentProp[] = await response.json();
+          setIsLoading(false);
+          return Promise.resolve(list);
+        } else {
+          setIsLoading(false);
+          return Promise.reject(await response.json());
+        }
       }
-    });
+    );
   };
   // 发布新的树洞留言
   const createNewComment = (newComment: CommentProp) => {
     setIsLoading(true);
-    return fetch(`${apiUrl}comment`, {
+    return fetch("/api/", {
       method: "POST",
       headers: {
         // 类型为json
