@@ -56,8 +56,6 @@ route.post("/register", async (req, res) => {
       createTime: Date.parse(new Date()),
       likes: [],
       disLikes: [],
-      publishComments: [],
-      publishReplies: [],
     };
     const newUser = await userModel.register(userInfo);
     const { _id, email } = newUser;

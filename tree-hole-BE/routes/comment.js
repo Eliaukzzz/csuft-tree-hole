@@ -11,7 +11,7 @@ route.post("/post", async (req, res) => {
     const comment = {
       ...req.body,
       createTime: Date.parse(new Date()),
-      poster_id: _id,
+      poster_id: ObjectId(_id),
       beLiked: [],
       beDisLiked: [],
       replies: [],

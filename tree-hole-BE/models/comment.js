@@ -17,11 +17,14 @@ exports.postComment = async (post) => {
 exports.findComment = async (query) => {
   try {
     const col = await commentsCollection();
-    let type = {
-      ...query,
-      content: new RegExp(query.content),
-      poster_id: new RegExp(query.poster_id),
-    };
+    let type;
+    type = query.poster_id
+      ? {
+          ...query,
+          content: new RegExp(query.content),
+          poster_id: ObjectId(query.poster_id),
+        }
+      : { ...query, content: new RegExp(query.content) };
     return col.find(type).sort({ createTime: -1 }).toArray();
   } catch (error) {
     throw "留言列表出错";
