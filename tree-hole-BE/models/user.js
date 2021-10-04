@@ -3,10 +3,10 @@ const usersCollection = require("../config/mongoDbConnection").getCollection(
 );
 const { ObjectId } = require("mongodb");
 // 注册
-exports.register = async (post) => {
+exports.register = async (user) => {
   try {
     const col = await usersCollection();
-    const result = await col.insertOne(post);
+    const result = await col.insertOne(user);
     return result.ops && result.ops[0];
   } catch (error) {
     throw "该邮箱已经注册";
@@ -24,12 +24,12 @@ exports.login = async (data) => {
   }
 };
 
-exports.findAll = async () => {
+exports.findOne = async (_id) => {
   try {
     const col = await usersCollection();
-    return col.find({}).toArray();
+    return col.find(_id).toArray();
   } catch (error) {
-    throw "查询用户列表出错";
+    throw "查询指定用户出错";
   }
 };
 

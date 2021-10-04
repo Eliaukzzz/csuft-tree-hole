@@ -1,5 +1,4 @@
 const express = require("express");
-const expressJwt = require("express-jwt");
 const jwt = require("jsonwebtoken");
 var route = express.Router();
 
@@ -135,35 +134,5 @@ route.post("/login", async (req, res) => {
     res.status(404).send(error);
   }
 });
-
-// route.put("/:id", async (req, res) => {
-//   try {
-//     const updatedPost = await postModel.update(req.params.id, req.body);
-//     res.json(updatedPost);
-//   } catch (error) {
-//     console.error(error);
-//     res.status(500).send();
-//   }
-// });
-
-// route.delete("/:id", async (req, res) => {
-//   try {
-//     await postModel.delete(req.params.id);
-//     res.status(204).send();
-//   } catch (error) {
-//     console.error(error);
-//     res.status(500).send();
-//   }
-// });
-
-// route.delete("/:id/comment", async (req, res) => {
-//   try {
-//     await postModel.deleteCommentByUser(req.params.id, req.body.user);
-//     res.status(204).send();
-//   } catch (error) {
-//     console.error(error);
-//     res.status(500).send();
-//   }
-// });
 
 module.exports = route;
