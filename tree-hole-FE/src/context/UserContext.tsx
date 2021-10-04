@@ -15,8 +15,6 @@ export interface UserProps {
   email?: string;
   likes?: string[];
   disLikes?: string[];
-  publishComments?: string[];
-  publishReplies?: string[];
   token?: string;
 }
 
