@@ -39,7 +39,7 @@ export const CaptureItem = ({
       scale: 4,
     }).then((canvas) => {
       let image = canvas.toDataURL("image/png", 1.0);
-      let fileName = `comment-card-${comment.id}`;
+      let fileName = `comment-card-${comment._id}`;
       saveAs(image, fileName);
     });
   };
@@ -81,7 +81,7 @@ export const CaptureItem = ({
             {comment.content}
           </p>
           <p className="absolute bottom-0 right-0 pb-2 pr-2">
-            ——{comment.poster.nickname}
+            ——{comment.posterInfo.nickname}
           </p>
         </div>
       </div>

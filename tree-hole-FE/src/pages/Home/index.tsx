@@ -33,7 +33,7 @@ export const Home = () => {
         />
         {commentsList?.map((comment) => {
           return (
-            <div key={comment.id} className="bg-white">
+            <div key={comment._id} className="bg-white">
               <CommentItem
                 isReply={false}
                 comment={comment}
@@ -45,7 +45,7 @@ export const Home = () => {
                     return (
                       <CommentItem
                         isReply={true}
-                        key={reply.id}
+                        key={reply._id}
                         comment={reply}
                       />
                     );

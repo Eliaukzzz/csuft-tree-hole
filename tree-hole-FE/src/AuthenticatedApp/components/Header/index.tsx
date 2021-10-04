@@ -43,7 +43,7 @@ export const Header = () => {
             setShowNav(false);
           }}
           className="py-2 px-6 border-gary-theme-gary border-b-2 lg:border-b-2 lg:border-r-2 text-base w-full text-center bg-gray-600 hover:bg-green-theme-green transition-colors duration-500"
-          to={`/account/${currentUser.id}`}
+          to={`/account/${currentUser._id}`}
         >
           个人信息
         </NavLink>
@@ -52,7 +52,7 @@ export const Header = () => {
             setShowNav(false);
           }}
           className="py-2 px-6 border-gary-theme-gary border-b-2 lg:border-b-2 lg:border-r-2 text-base w-full text-center bg-gray-600 hover:bg-green-theme-green transition-colors duration-500"
-          to={`/comments/${currentUser.id}`}
+          to={`/comments/${currentUser._id}`}
         >
           我发布的
         </NavLink>
@@ -61,7 +61,7 @@ export const Header = () => {
             setShowNav(false);
           }}
           className="py-2 px-6 border-gary-theme-gary border-b-2 lg:border-b-2 lg:border-r-2 text-base w-full text-center bg-gray-600 hover:bg-green-theme-green transition-colors duration-500"
-          to={`/favorites/${currentUser.id}`}
+          to={`/favorites/${currentUser._id}`}
         >
           我喜欢的
         </NavLink>

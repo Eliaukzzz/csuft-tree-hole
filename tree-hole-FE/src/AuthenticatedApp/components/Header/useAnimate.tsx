@@ -5,7 +5,7 @@ export const useAnimate = (
   setAnimateClass: React.Dispatch<React.SetStateAction<"start" | "end">>
 ) => {
   let delay: number;
-  let timeout: number;
+  let timeout: NodeJS.Timeout;
   const h1 = document.querySelector("h1");
   h1?.addEventListener("animationend", (event) => {
     if (

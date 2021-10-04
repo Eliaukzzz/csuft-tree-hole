@@ -1,5 +1,5 @@
 import React, { ReactNode, useContext, useState } from "react";
-// import { apiUrl } from "../utils/apiUrl";
+import { conversionTimestamp } from "../utils/conversionTimestamp";
 import { useLoad } from "./Load";
 import { UserProps } from "./UserContext";
 
@@ -12,25 +12,25 @@ export type CommentType =
   | "all";
 // 留言的类型定义
 export interface CommentProp {
-  id?: number;
-  poster: UserProps;
+  _id: string;
   content: string;
   type: CommentType;
-  time: string;
-  likes: number;
-  dislikes: number;
-  replies: null | ReplyProp[];
+  createTime: number | string;
+  beLiked: UserProps[];
+  beDisLiked: UserProps[];
+  replies: ReplyProp[];
+  posterInfo: UserProps;
 }
 
 // 留言评论的类型定义
 export interface ReplyProp {
-  id?: number;
-  replyTo: number;
-  poster: UserProps;
+  _id: string;
   content: string;
-  time: string;
-  likes: number;
-  dislikes: number;
+  type: CommentType;
+  createTime: number | string;
+  posterInfo: UserProps;
+  beLiked: UserProps[];
+  beDisLiked: UserProps[];
 }
 
 // 创建留言和获取留言评论函数的context
@@ -38,8 +38,12 @@ const CommentsListContext = React.createContext<
   | {
       commentsList: CommentProp[] | null;
       commentListType: CommentType;
-      getCommentsList: (type?: CommentType) => Promise<CommentProp[]>;
-      createNewComment: (comment: CommentProp) => Promise<string>;
+      getCommentsList: (type: CommentType) => Promise<CommentProp[]>;
+      getCurrentUserCommentsList: (userId: string) => Promise<CommentProp[]>;
+      createNewComment: (comment: {
+        content: string;
+        type: string;
+      }) => Promise<string>;
       setCommentsList: React.Dispatch<
         React.SetStateAction<CommentProp[] | null>
       >;
@@ -61,38 +65,85 @@ export const CommentListProvider = ({ children }: { children: ReactNode }) => {
   // 从LoadProvider中取出isLoading判断是否在加载
   const { setIsLoading } = useLoad();
   // 获取指定树洞留言列表
-  const getCommentsList = (type: CommentType = "all") => {
+  const getCommentsList = (type: CommentType) => {
+    const token = localStorage.getItem("__CSUFTTreeHoleToken__");
+    if (!token) return Promise.reject("本地没有token");
     setIsLoading(true);
-    return fetch(type === "all" ? "/api/" : `/api?type=${type}/`).then(
-      async (response) => {
-        // 请求成功
-        if (response.ok) {
-          // 获取树洞留言列表
-          const list: CommentProp[] = await response.json();
-          setIsLoading(false);
-          return Promise.resolve(list);
-        } else {
-          setIsLoading(false);
-          return Promise.reject(await response.json());
-        }
+    return fetch(
+      type === "all" ? `/api/comment/` : `/api/comment/?type=${type}`,
+      {
+        headers: {
+          // 如果有token 携带token
+          Authorization: token,
+        },
       }
-    );
+    ).then(async (response) => {
+      // 请求成功
+      if (response.ok) {
+        // 获取树洞留言列表
+        const list: CommentProp[] = await response.json();
+        setIsLoading(false);
+        const commentList: CommentProp[] = list.map((comment) => {
+          return {
+            ...comment,
+            createTime: conversionTimestamp(comment.createTime as number),
+          };
+        });
+        return Promise.resolve(commentList);
+      } else {
+        setIsLoading(false);
+        return Promise.reject(await response.json());
+      }
+    });
+  };
+
+  const getCurrentUserCommentsList = (userId: string) => {
+    const token = localStorage.getItem("__CSUFTTreeHoleToken__");
+    if (!token) return Promise.reject("本地没有token");
+    setIsLoading(true);
+    return fetch(`/api/comment/?poster_id=${userId}`, {
+      headers: {
+        // 如果有token 携带token
+        Authorization: token,
+      },
+    }).then(async (response) => {
+      // 请求成功
+      if (response.ok) {
+        // 获取树洞留言列表
+        const list: CommentProp[] = await response.json();
+        setIsLoading(false);
+        const commentList: CommentProp[] = list.map((comment) => {
+          return {
+            ...comment,
+            createTime: conversionTimestamp(comment.createTime as number),
+          };
+        });
+        return Promise.resolve(commentList);
+      } else {
+        setIsLoading(false);
+        return Promise.reject(await response.json());
+      }
+    });
   };
   // 发布新的树洞留言
-  const createNewComment = (newComment: CommentProp) => {
+  const createNewComment = (newComment: { content: string; type: string }) => {
     setIsLoading(true);
-    return fetch("/api/", {
+    const token = localStorage.getItem("__CSUFTTreeHoleToken__");
+    if (!token) return Promise.reject("本地没有token");
+    return fetch("/api/comment/post", {
       method: "POST",
       headers: {
         // 类型为json
         "Content-Type": "application/json",
+        // 如果有token 携带token
+        Authorization: token,
       },
       body: JSON.stringify(newComment),
     }).then(async (response) => {
       // 请求成功
       if (response.ok) {
         // 重新请求一次留言列表
-        getCommentsList().then((list) => {
+        getCommentsList("all").then((list) => {
           setCommentsList(list);
           setCommentListType("all");
         });
@@ -112,6 +163,7 @@ export const CommentListProvider = ({ children }: { children: ReactNode }) => {
         createNewComment,
         setCommentsList,
         setCommentListType,
+        getCurrentUserCommentsList,
       }}
     />
   );

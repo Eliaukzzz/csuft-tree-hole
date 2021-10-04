@@ -14,8 +14,8 @@ export const CommentItem = ({
   isReply = false,
   commentType,
 }: {
-  comment: CommentProp | ReplyProp;
   isReply: boolean;
+  comment: CommentProp | ReplyProp;
   commentType?: CommentType; // 留言类型
 }) => {
   const { currentUser } = useUser();
@@ -45,7 +45,7 @@ export const CommentItem = ({
   return (
     <div className="mb-2">
       <div className="float-right mb-2 mt-3">
-        {comment.poster.id === currentUser.id ? (
+        {comment.posterInfo._id === currentUser._id ? (
           <button className="iconfont text-xl text-red-500">&#xe665;</button>
         ) : null}
         <button
@@ -59,13 +59,13 @@ export const CommentItem = ({
       </div>
       <div className="flex">
         <div>
-          <NavLink to={`/account/${comment.poster.id}`}>
+          <NavLink to={`/account/${comment.posterInfo._id}`}>
             <p className="text-green-theme-green text-xl mb-2 mt-3">
-              {comment.poster.nickname}
+              {comment.posterInfo.nickname}
             </p>
           </NavLink>
           <p className="text-gray-600 text-sm">
-            {comment.time}
+            {comment.createTime}
             {isReply ? null : (
               <span className="text-sm float-right ml-4">#{type}#</span>
             )}
@@ -78,8 +78,8 @@ export const CommentItem = ({
         <div className="flex items-center pb-4">
           <div
             className={`${
-              currentUser.favorite?.find((likeId) => {
-                return likeId === comment.id;
+              currentUser.likes?.find((likeId) => {
+                return likeId === comment._id;
               })
                 ? "text-red-500"
                 : ""
@@ -87,13 +87,13 @@ export const CommentItem = ({
           >
             <button className="pl-3 text-lg hover:text-red-500">
               <span className="iconfont">&#xe673;</span>
-              <span className="px-1">{comment.likes}</span>
+              <span className="px-1">{comment.beLiked}</span>
             </button>
           </div>
           <div
             className={`${
-              currentUser.hate?.find((hateId) => {
-                return hateId === comment.id;
+              currentUser.disLikes?.find((hateId) => {
+                return hateId === comment._id;
               })
                 ? "text-red-500"
                 : ""
@@ -101,7 +101,7 @@ export const CommentItem = ({
           >
             <button className="pl-3 text-lg hover:text-red-500">
               <span className="iconfont">&#xe666;</span>
-              <span className="px-1">{comment.dislikes}</span>
+              <span className="px-1">{comment.beDisLiked}</span>
             </button>
           </div>
           <div></div>

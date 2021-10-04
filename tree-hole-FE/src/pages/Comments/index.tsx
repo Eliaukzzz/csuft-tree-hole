@@ -10,11 +10,18 @@ export const Comments = () => {
   const { currentUser } = useUser();
   // 接收对应的用户id
   const { id }: { id: string } = useParams();
-  const { commentsList, getCommentsList } = useCommentsList();
+  const { commentsList, setCommentsList, getCurrentUserCommentsList } =
+    useCommentsList();
   useEffect(() => {
-    if (currentUser.id === +id) {
-      // 如果是当前登录获取留言列表
-      getCommentsList();
+    if (currentUser._id === id) {
+      //清空当前列表
+      setCommentsList([]);
+      // 当前登录用户只能获取自己的留言列表
+      getCurrentUserCommentsList(id)
+        .then((list) => setCommentsList(list))
+        .catch((err) => {
+          console.error(err);
+        });
     }
   }, []);
 
@@ -22,11 +29,11 @@ export const Comments = () => {
     <div className="px-5 mt-5">
       {commentsList
         ?.filter((comment) => {
-          return comment.poster.id === currentUser.id;
+          return comment.posterInfo._id === currentUser._id;
         })
         .map((comment) => {
           return (
-            <div key={comment.id}>
+            <div key={comment._id}>
               <CommentItem
                 isReply={false}
                 comment={comment}
@@ -38,7 +45,7 @@ export const Comments = () => {
                     return (
                       <CommentItem
                         isReply={true}
-                        key={reply.id}
+                        key={reply._id}
                         comment={reply}
                       />
                     );

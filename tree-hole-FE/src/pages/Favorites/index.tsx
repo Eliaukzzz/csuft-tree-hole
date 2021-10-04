@@ -23,11 +23,11 @@ export const Favorites = () => {
     <div className="px-5 mt-5">
       {favoriteList
         ?.filter((comment) => {
-          return currentUser.favorite?.includes(comment.id as number);
+          return currentUser.likes?.includes(comment._id);
         })
         .map((comment) => {
           return (
-            <div key={comment.id}>
+            <div key={comment._id}>
               <CommentItem
                 isReply={false}
                 comment={comment}
@@ -39,7 +39,7 @@ export const Favorites = () => {
                     return (
                       <CommentItem
                         isReply={true}
-                        key={reply.id}
+                        key={reply._id}
                         comment={reply}
                       />
                     );

@@ -1,6 +1,5 @@
 import React, { ReactNode, useState } from "react";
 import {
-  CommentProp,
   CommentType,
   useCommentsList,
 } from "../../../context/CommentsListContext";
@@ -14,7 +13,7 @@ export const CommentBox = ({
   isTopCommentBox?: boolean;
 }) => {
   // 输入框受控组件
-  const [newComment, setNewComment] = useState("");
+  const [content, setContent] = useState("");
 
   // select受控组件
   const [newCommentType, setNewCommentType] = useState<CommentType>("life");
@@ -27,20 +26,14 @@ export const CommentBox = ({
       | React.KeyboardEvent<HTMLTextAreaElement>
   ) => {
     event.preventDefault();
-    const mockData: CommentProp = {
-      poster: {
-        id: 1,
-        nickname: "苍术",
-      },
-      content: newComment,
-      time: "刚刚",
-      dislikes: 0,
-      likes: 0,
-      replies: null,
-      type: newCommentType,
-    };
-    createNewComment(mockData);
-    setNewComment("");
+    if (isTopCommentBox) {
+      const newComment = {
+        content: content,
+        type: newCommentType,
+      };
+      createNewComment(newComment);
+    }
+    setContent("");
   };
   return (
     <div>
@@ -58,9 +51,9 @@ export const CommentBox = ({
             }
           }}
           onChange={(event) => {
-            setNewComment(event.target.value);
+            setContent(event.target.value);
           }}
-          value={newComment}
+          value={content}
           placeholder="那些现实中不能发出的声音，请把它留在这里"
           className="bg-gray-50 mt-3 p-2 rounded border-2 border-gary-theme-gary"
         ></textarea>

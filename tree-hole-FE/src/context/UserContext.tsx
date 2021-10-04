@@ -8,15 +8,15 @@ import React, {
 import { useLoad } from "./Load";
 // 用户信息接口
 export interface UserProps {
-  isLogin: boolean;
+  isLogin?: boolean;
   _id?: string;
   nickname?: string;
   gender?: string;
   email?: string;
-  likes?: [];
-  disLikes?: [];
-  publishComments?: [];
-  publishReplies?: [];
+  likes?: string[];
+  disLikes?: string[];
+  publishComments?: string[];
+  publishReplies?: string[];
   token?: string;
 }
 
@@ -82,7 +82,7 @@ export const UserContextProvider = ({ children }: { children: ReactNode }) => {
       }
     });
   };
-  // 保存登录状态 jwttoken
+  // 刷新时 保存登录状态 jwttoken
   const bootstrapUser = () => {
     // 开始获取信息时Loading设为true
     setIsLoading(true);
