@@ -87,17 +87,7 @@ route.post("/login", async (req, res) => {
     };
     const UserInfo = await userModel.login(loginInfo);
     if (UserInfo[0]) {
-      const {
-        _id,
-        nickname,
-        gender,
-        email,
-        password,
-        likes,
-        disLikes,
-        publishComments,
-        publishReplies,
-      } = UserInfo[0];
+      const { _id, nickname, gender, email, likes, disLikes } = UserInfo[0];
 
       const authToken =
         "Bearer " +
@@ -119,8 +109,6 @@ route.post("/login", async (req, res) => {
         email,
         likes,
         disLikes,
-        publishComments,
-        publishReplies,
         token: authToken,
       };
       res.status(200).json(loginUser);

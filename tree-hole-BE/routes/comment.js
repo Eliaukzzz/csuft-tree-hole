@@ -36,9 +36,10 @@ route.get("/", async (req, res) => {
         const posterInfo = await userModel.findOne({
           _id: ObjectId(comment.poster_id),
         });
+        const { _id, nickname, gender, email, likes, disLikes } = posterInfo[0];
         return {
           ...comment,
-          posterInfo: posterInfo[0],
+          posterInfo: { _id, nickname, gender, email, likes, disLikes },
         };
       })
     );
