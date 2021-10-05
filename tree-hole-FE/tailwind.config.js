@@ -43,7 +43,7 @@ module.exports = {
         "card-bg-w-m": "16rem",
       },
       backgroundImage: (theme) => ({
-        bg: "url('./src/assets/img/bg.png')",
+        bg: "url('/src/assets/img/bg.png')",
       }),
     },
   },

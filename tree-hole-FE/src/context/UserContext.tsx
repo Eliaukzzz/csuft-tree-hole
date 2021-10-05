@@ -6,12 +6,13 @@ import React, {
   useState,
 } from "react";
 import { useLoad } from "./Load";
+export type genderType = "male" | "female" | "secret" | "男" | "女" | "保密";
 // 用户信息接口
 export interface UserProps {
   isLogin?: boolean;
   _id?: string;
   nickname?: string;
-  gender?: string;
+  gender?: genderType;
   email?: string;
   likes?: string[];
   disLikes?: string[];
@@ -34,8 +35,8 @@ const UserContext = createContext<
       }) => Promise<UserProps>;
       // 登录
       login: (data: { email: string; password: string }) => Promise<UserProps>;
-      // 获取指定id的用户信息
-      // getUserInfo: (id: number) => Promise<UserProps>;
+      // 获取指定_id的用户信息
+      getUserInfo: (_id: string) => Promise<UserProps>;
       logout: () => void;
     }
   | undefined
@@ -80,6 +81,36 @@ export const UserContextProvider = ({ children }: { children: ReactNode }) => {
       }
     });
   };
+  // 获取指定用户信息
+  const getUserInfo = (_id: string) => {
+    // 先将loading状态设置为true
+    setIsLoading(true);
+    const token = localStorage.getItem("__CSUFTTreeHoleToken__");
+    if (!token) {
+      setIsLoading(false);
+      return Promise.reject("本地没有token");
+    }
+    return fetch(`/api/user/?_id=${_id}`, {
+      method: "GET",
+      headers: {
+        Authorization: token,
+      },
+    }).then(async (response) => {
+      if (response.ok) {
+        // 请求成功时
+        const data = await response.json();
+        setIsLoading(false); // loading状态设为false
+        const user = data as UserProps;
+        // 返回携带用户数据的Promise
+        return Promise.resolve(user);
+      } else {
+        // 请求失败时，loading状态设为false
+        setIsLoading(false);
+        // 返回携带错误信息的Promise
+        return Promise.reject(await response.json());
+      }
+    });
+  };
   // 刷新时 保存登录状态 jwttoken
   const bootstrapUser = () => {
     // 开始获取信息时Loading设为true
@@ -109,6 +140,8 @@ export const UserContextProvider = ({ children }: { children: ReactNode }) => {
       } else {
         // 获取失败时，loading设为false
         setIsLoading(false);
+        // 失败时清除无效的token
+        localStorage.removeItem("__CSUFTTreeHoleToken__");
         return Promise.reject();
       }
     });
@@ -171,6 +204,7 @@ export const UserContextProvider = ({ children }: { children: ReactNode }) => {
         register,
         login,
         logout,
+        getUserInfo,
       }}
     />
   );

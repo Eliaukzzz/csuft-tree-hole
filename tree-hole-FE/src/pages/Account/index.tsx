@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import { UserProps, useUser } from "../../context/UserContext";
+import { genderType, UserProps, useUser } from "../../context/UserContext";
 
 export const Account = () => {
   // 获取当前登录的用户信息
-  const { currentUser, logout } = useUser();
+  const { currentUser, logout, getUserInfo } = useUser();
   // 接收对应的用户id
   const { id }: { id: string } = useParams();
   // 获取对应用户信息
@@ -13,15 +13,22 @@ export const Account = () => {
   useEffect(() => {
     if (currentUser._id === id) {
       // 如果是当前登录用户自己的信息页面
-      setPageUser(currentUser);
+      setPageUser({
+        ...currentUser,
+        gender: genderChange(currentUser.gender as genderType),
+      });
+    } else {
+      // 如果是其他用户的信息页面
+      // 使用getUserInfo获取对应用户id的信息
+      getUserInfo(id)
+        .then((result) => {
+          setPageUser({
+            ...result,
+            gender: genderChange(result.gender as genderType),
+          });
+        })
+        .catch((err) => console.error(err));
     }
-    //  else {
-    //   // 如果是其他用户的信息页面
-    //   // 使用getUserInfo获取对应用户id的信息
-    //   getUserInfo(+id).then((result) => {
-    //     setPageUser(result);
-    //   });
-    // }
   }, []);
   return (
     <div className="flex items-center flex-col pt-10 min-w-account-mw">
@@ -55,4 +62,15 @@ export const Account = () => {
       ) : null}
     </div>
   );
+};
+
+const genderChange = (genderEn: genderType) => {
+  switch (genderEn) {
+    case "male":
+      return "男";
+    case "female":
+      return "女";
+    default:
+      return "保密";
+  }
 };
