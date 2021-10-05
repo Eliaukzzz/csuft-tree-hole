@@ -27,7 +27,7 @@ exports.login = async (data) => {
 exports.findOne = async (_id) => {
   try {
     const col = await usersCollection();
-    return col.find(_id).toArray();
+    return col.find(ObjectId(_id)).toArray();
   } catch (error) {
     throw "查询指定用户出错";
   }

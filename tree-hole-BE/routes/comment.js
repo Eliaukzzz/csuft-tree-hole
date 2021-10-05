@@ -33,9 +33,7 @@ route.get("/", async (req, res) => {
     // 用Promise.all取出map结果
     const commentList = await Promise.all(
       list.map(async (comment) => {
-        const posterInfo = await userModel.findOne({
-          _id: ObjectId(comment.poster_id),
-        });
+        const posterInfo = await userModel.findOne(comment.poster_id);
         const { _id, nickname, gender, email, likes, disLikes } = posterInfo[0];
         return {
           ...comment,

@@ -3,6 +3,16 @@ const jwt = require("jsonwebtoken");
 var route = express.Router();
 
 const userModel = require("../models/user");
+// 获取指定id用户信息
+route.get("/", async (req, res) => {
+  if (req.query._id) {
+    const userInfo = await userModel.findOne(req.query._id);
+    const { _id, nickname, gender, email, likes, disLikes } = userInfo[0];
+    res.status(200).send({ _id, nickname, gender, email, likes, disLikes });
+  } else {
+    res.status(400).send({ err: "不存在的用户" });
+  }
+});
 // 获取当前token用户信息
 route.get("/me", async (req, res) => {
   if (!req.user._id) {
