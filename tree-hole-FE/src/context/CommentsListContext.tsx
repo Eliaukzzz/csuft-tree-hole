@@ -40,6 +40,11 @@ const CommentsListContext = React.createContext<
       commentListType: CommentType;
       getCommentsList: (type: CommentType) => Promise<CommentProp[]>;
       getCurrentUserCommentsList: (userId: string) => Promise<CommentProp[]>;
+      likeAndDislike: (
+        comment_id: string,
+        user_id: string,
+        type: "like" | "dislike" | "cancelLike" | "cancelDislike"
+      ) => Promise<CommentProp>;
       createNewComment: (comment: {
         content: string;
         type: string;
@@ -96,7 +101,7 @@ export const CommentListProvider = ({ children }: { children: ReactNode }) => {
       }
     });
   };
-
+  // 获取当前用户发布的留言列表
   const getCurrentUserCommentsList = (userId: string) => {
     const token = localStorage.getItem("__CSUFTTreeHoleToken__");
     if (!token) return Promise.reject("本地没有token");
@@ -153,6 +158,39 @@ export const CommentListProvider = ({ children }: { children: ReactNode }) => {
       }
     });
   };
+  // 点赞点踩
+  const likeAndDislike = (
+    comment_id: string,
+    user_id: string,
+    type: "like" | "dislike" | "cancelLike" | "cancelDislike"
+  ) => {
+    const token = localStorage.getItem("__CSUFTTreeHoleToken__");
+    if (!token) return Promise.reject("本地没有token");
+    setIsLoading(true);
+    return fetch(`/api/comment/feel`, {
+      method: "POST",
+      headers: {
+        Authorization: token,
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ comment_id, user_id, type }),
+    }).then(async (response) => {
+      // 请求成功
+      if (response.ok) {
+        // 获取修改后留言
+        const result: CommentProp = await response.json();
+        setIsLoading(false);
+        const comment: CommentProp = {
+          ...result,
+          createTime: conversionTimestamp(result.createTime as number),
+        };
+        return Promise.resolve(comment);
+      } else {
+        setIsLoading(false);
+        return Promise.reject(await response.json());
+      }
+    });
+  };
   return (
     <CommentsListContext.Provider
       children={children}
@@ -161,6 +199,7 @@ export const CommentListProvider = ({ children }: { children: ReactNode }) => {
         commentListType,
         getCommentsList,
         createNewComment,
+        likeAndDislike,
         setCommentsList,
         setCommentListType,
         getCurrentUserCommentsList,
