@@ -33,19 +33,57 @@ exports.findOne = async (_id) => {
   }
 };
 
-// exports.update = async (id, post) => {
-//   try {
-//     const col = await usersCollection();
-//     const result = await col.findOneAndUpdate(
-//       { _id: ObjectId(id) },
-//       { $set: post },
-//       { returnOriginal: false }
-//     );
-//     return result.value;
-//   } catch (error) {
-//     throw "更新文章出错";
-//   }
-// };
+exports.likeAndDislike = async (change) => {
+  try {
+    const col = await usersCollection();
+    const { comment_id, user_id, type } = change;
+    const originUser = await col.find({ _id: ObjectId(user_id) }).toArray();
+    let list;
+    let result;
+    switch (type) {
+      case "like":
+        list = [...originUser[0].likes];
+        list.push(comment_id);
+        result = await col.updateOne(
+          { _id: ObjectId(user_id) },
+          { $set: { likes: list } }
+        );
+        return result.value;
+
+      case "dislike":
+        list = [...originUser[0].disLikes];
+        list.push(comment_id);
+        result = await col.updateOne(
+          { _id: ObjectId(user_id) },
+          { $set: { disLikes: list } }
+        );
+        return result.value;
+
+      case "cancelLike":
+        list = [...originUser[0].likes];
+        list = list.filter((_id) => _id != comment_id);
+        result = await col.updateOne(
+          { _id: ObjectId(user_id) },
+          { $set: { likes: list } }
+        );
+        return result.value;
+
+      case "cancelDislike":
+        list = [...originUser[0].disLikes];
+        list = list.filter((_id) => _id != comment_id);
+        result = await col.updateOne(
+          { _id: ObjectId(user_id) },
+          { $set: { disLikes: list } }
+        );
+        return result.value;
+
+      default:
+        return;
+    }
+  } catch (error) {
+    throw "用户点赞点踩出错";
+  }
+};
 
 // exports.delete = async (id) => {
 //   try {

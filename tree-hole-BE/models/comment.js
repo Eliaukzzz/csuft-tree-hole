@@ -31,19 +31,63 @@ exports.findComment = async (query) => {
   }
 };
 
-// exports.update = async (id, post) => {
-//   try {
-//     const col = await usersCollection();
-//     const result = await col.findOneAndUpdate(
-//       { _id: ObjectId(id) },
-//       { $set: post },
-//       { returnOriginal: false }
-//     );
-//     return result.value;
-//   } catch (error) {
-//     throw "更新文章出错";
-//   }
-// };
+exports.likeAndDislike = async (change) => {
+  try {
+    const col = await commentsCollection();
+    const { comment_id, user_id, type } = change;
+    const originComment = await col
+      .find({ _id: ObjectId(comment_id) })
+      .toArray();
+    let list;
+    let result;
+    switch (type) {
+      case "like":
+        list = [...originComment[0].beLiked];
+        list.push(user_id);
+        result = await col.findOneAndUpdate(
+          { _id: ObjectId(comment_id) },
+          { $set: { beLiked: list } },
+          { returnOriginal: false }
+        );
+        return result.value;
+
+      case "dislike":
+        list = [...originComment[0].beDisLiked];
+        list.push(user_id);
+        result = await col.findOneAndUpdate(
+          { _id: ObjectId(comment_id) },
+          { $set: { beDisLiked: list } },
+          { returnOriginal: false }
+        );
+        return result.value;
+
+      case "cancelLike":
+        list = [...originComment[0].beLiked];
+        list = list.filter((_id) => _id != user_id);
+        result = await col.findOneAndUpdate(
+          { _id: ObjectId(comment_id) },
+          { $set: { beLiked: list } },
+          { returnOriginal: false }
+        );
+        return result.value;
+
+      case "cancelDislike":
+        list = [...originComment[0].beDisLiked];
+        list = list.filter((_id) => _id != user_id);
+        result = await col.findOneAndUpdate(
+          { _id: ObjectId(comment_id) },
+          { $set: { beDisLiked: list } },
+          { returnOriginal: false }
+        );
+        return result.value;
+
+      default:
+        return;
+    }
+  } catch (error) {
+    throw "用户点赞点踩出错";
+  }
+};
 
 // exports.delete = async (id) => {
 //   try {

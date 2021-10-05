@@ -44,5 +44,19 @@ route.get("/", async (req, res) => {
     res.status(200).json(commentList);
   } catch (error) {}
 });
-
+// 点赞&点踩留言
+route.post("/feel", async (req, res) => {
+  try {
+    await userModel.likeAndDislike({ ...req.body });
+    const comment = await commentModel.likeAndDislike({
+      ...req.body,
+    });
+    const posterInfo = await userModel.findOne(comment.poster_id);
+    const { _id, nickname, gender, email, likes, disLikes } = posterInfo[0];
+    res.status(201).send({
+      ...comment,
+      posterInfo: { _id, nickname, gender, email, likes, disLikes },
+    });
+  } catch (error) {}
+});
 module.exports = route;
