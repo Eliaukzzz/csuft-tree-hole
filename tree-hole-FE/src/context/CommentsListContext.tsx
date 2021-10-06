@@ -39,7 +39,8 @@ const CommentsListContext = React.createContext<
       commentsList: CommentProp[] | null;
       commentListType: CommentType;
       getCommentsList: (type: CommentType) => Promise<CommentProp[]>;
-      getCurrentUserCommentsList: (userId: string) => Promise<CommentProp[]>;
+      getCurrentUserCommentsList: () => Promise<CommentProp[]>;
+      getFavoriteCommentsList: () => Promise<CommentProp[]>;
       likeAndDislike: (
         comment_id: string,
         user_id: string,
@@ -102,11 +103,41 @@ export const CommentListProvider = ({ children }: { children: ReactNode }) => {
     });
   };
   // 获取当前用户发布的留言列表
-  const getCurrentUserCommentsList = (userId: string) => {
+  const getCurrentUserCommentsList = () => {
     const token = localStorage.getItem("__CSUFTTreeHoleToken__");
     if (!token) return Promise.reject("本地没有token");
     setIsLoading(true);
-    return fetch(`/api/comment/?poster_id=${userId}`, {
+    return fetch(`/api/comment/my`, {
+      headers: {
+        // 如果有token 携带token
+        Authorization: token,
+      },
+    }).then(async (response) => {
+      // 请求成功
+      if (response.ok) {
+        // 获取树洞留言列表
+        const list: CommentProp[] = await response.json();
+        setIsLoading(false);
+        const commentList: CommentProp[] = list.map((comment) => {
+          return {
+            ...comment,
+            createTime: conversionTimestamp(comment.createTime as number),
+          };
+        });
+        return Promise.resolve(commentList);
+      } else {
+        setIsLoading(false);
+        return Promise.reject(await response.json());
+      }
+    });
+  };
+
+  // 获取当前用户点赞的留言列表
+  const getFavoriteCommentsList = () => {
+    const token = localStorage.getItem("__CSUFTTreeHoleToken__");
+    if (!token) return Promise.reject("本地没有token");
+    setIsLoading(true);
+    return fetch(`/api/comment/favorite`, {
       headers: {
         // 如果有token 携带token
         Authorization: token,
@@ -203,6 +234,7 @@ export const CommentListProvider = ({ children }: { children: ReactNode }) => {
         setCommentsList,
         setCommentListType,
         getCurrentUserCommentsList,
+        getFavoriteCommentsList,
       }}
     />
   );
