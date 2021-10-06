@@ -15,6 +15,7 @@ route.post("/post", async (req, res) => {
       beLiked: [],
       beDisLiked: [],
       replies: [],
+      hidden: false,
     };
     const newComment = await commentModel.postComment(comment);
     res.status(201).json({ ...newComment });
@@ -31,16 +32,35 @@ route.get("/", async (req, res) => {
       ...req.query,
     });
     // 用Promise.all取出map结果
-    const commentList = await Promise.all(
-      list.map(async (comment) => {
-        const posterInfo = await userModel.findOne(comment.poster_id);
-        const { _id, nickname, gender, email, likes, disLikes } = posterInfo[0];
-        return {
-          ...comment,
-          posterInfo: { _id, nickname, gender, email, likes, disLikes },
-        };
+    const commentList = await processCommentList(list);
+    res.status(200).json(commentList);
+  } catch (error) {}
+});
+// 获取我发布的留言列表
+route.get("/my", async (req, res) => {
+  try {
+    const list = await commentModel.findComment({
+      poster_id: req.user._id,
+    });
+    // 用Promise.all取出map结果
+    const commentList = await processCommentList(list);
+    res.status(200).json(commentList);
+  } catch (error) {}
+});
+// 获取我喜欢的列表
+route.get("/favorite", async (req, res) => {
+  try {
+    const user = await userModel.findOne(req.user._id);
+    const likeList = user[0].likes.reverse();
+    let commentList = await Promise.all(
+      likeList.map(async (comment_id) => {
+        const comment = await commentModel.findComment({
+          _id: comment_id,
+        });
+        return comment[0];
       })
     );
+    commentList = await processCommentList(commentList);
     res.status(200).json(commentList);
   } catch (error) {}
 });
@@ -60,3 +80,16 @@ route.post("/feel", async (req, res) => {
   } catch (error) {}
 });
 module.exports = route;
+
+const processCommentList = async (commentList) => {
+  return await Promise.all(
+    commentList.map(async (comment) => {
+      const posterInfo = await userModel.findOne(comment.poster_id);
+      const { _id, nickname, gender, email, likes, disLikes } = posterInfo[0];
+      return {
+        ...comment,
+        posterInfo: { _id, nickname, gender, email, likes, disLikes },
+      };
+    })
+  );
+};

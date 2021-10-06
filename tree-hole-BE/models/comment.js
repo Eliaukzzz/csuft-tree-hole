@@ -23,14 +23,27 @@ exports.findComment = async (query) => {
           ...query,
           content: new RegExp(query.content),
           poster_id: ObjectId(query.poster_id),
+          hidden: false,
         }
-      : { ...query, content: new RegExp(query.content) };
+      : {
+          ...query,
+          content: new RegExp(query.content),
+          hidden: false,
+        };
+    type = query._id
+      ? {
+          ...type,
+          _id: ObjectId(type._id),
+        }
+      : {
+          ...type,
+        };
     return col.find(type).sort({ createTime: -1 }).toArray();
   } catch (error) {
     throw "留言列表出错";
   }
 };
-
+// 点赞点踩
 exports.likeAndDislike = async (change) => {
   try {
     const col = await commentsCollection();
