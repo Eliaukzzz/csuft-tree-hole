@@ -15,12 +15,6 @@ export const Home = () => {
     setCommentsList,
     setCommentListType,
   } = useCommentsList();
-  // 挂载主页时，获取列表
-  useEffect(() => {
-    getCommentsList(commentListType).then((list) => {
-      setCommentsList(list);
-    });
-  }, []);
   // 切换页面类型时 请求获取列表
   useEffect(() => {
     getCommentsList(commentListType).then((list) => {
