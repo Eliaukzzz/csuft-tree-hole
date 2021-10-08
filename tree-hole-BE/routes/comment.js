@@ -34,7 +34,9 @@ route.get("/", async (req, res) => {
     // 用Promise.all取出map结果
     const commentList = await processCommentList(list);
     res.status(200).json(commentList);
-  } catch (error) {}
+  } catch (error) {
+    res.status(500).send({ err: error });
+  }
 });
 // 获取我发布的留言列表
 route.get("/my", async (req, res) => {
@@ -45,7 +47,9 @@ route.get("/my", async (req, res) => {
     // 用Promise.all取出map结果
     const commentList = await processCommentList(list);
     res.status(200).json(commentList);
-  } catch (error) {}
+  } catch (error) {
+    res.status(500).send({ err: error });
+  }
 });
 // 获取我喜欢的列表
 route.get("/favorite", async (req, res) => {
@@ -62,10 +66,12 @@ route.get("/favorite", async (req, res) => {
     );
     commentList = await processCommentList(commentList);
     res.status(200).json(commentList);
-  } catch (error) {}
+  } catch (error) {
+    res.status(500).send({ err: error });
+  }
 });
 // 点赞&点踩留言
-route.post("/feel", async (req, res) => {
+route.patch("/feel", async (req, res) => {
   try {
     await userModel.likeAndDislike({ ...req.body });
     const comment = await commentModel.likeAndDislike({
@@ -73,12 +79,24 @@ route.post("/feel", async (req, res) => {
     });
     const posterInfo = await userModel.findOne(comment.poster_id);
     const { _id, nickname, gender, email, likes, disLikes } = posterInfo[0];
-    res.status(201).send({
+    res.status(204).send({
       ...comment,
       posterInfo: { _id, nickname, gender, email, likes, disLikes },
     });
-  } catch (error) {}
+  } catch (error) {
+    res.status(500).send({ err: error });
+  }
 });
+
+route.patch("/remove", async (req, res) => {
+  try {
+    await commentModel.removeComment(req.body.comment_id);
+    res.status(200).send({ msg: "成功删除留言" });
+  } catch (error) {
+    res.status(500).send({ err: error });
+  }
+});
+
 module.exports = route;
 
 const processCommentList = async (commentList) => {

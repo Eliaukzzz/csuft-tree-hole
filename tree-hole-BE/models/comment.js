@@ -102,14 +102,19 @@ exports.likeAndDislike = async (change) => {
   }
 };
 
-// exports.delete = async (id) => {
-//   try {
-//     const col = await usersCollection();
-//     await col.deleteOne({ _id: ObjectId(id) });
-//   } catch (error) {
-//     throw "删除文章出错";
-//   }
-// };
+exports.removeComment = async (comment_id) => {
+  try {
+    const col = await commentsCollection();
+    const result = await col.findOneAndUpdate(
+      { _id: ObjectId(comment_id) },
+      { $set: { hidden: true } },
+      { returnOriginal: false }
+    );
+    return result;
+  } catch (error) {
+    throw "删除文章出错";
+  }
+};
 
 // exports.deleteCommentByUser = async (postId, user) => {
 //   try {
