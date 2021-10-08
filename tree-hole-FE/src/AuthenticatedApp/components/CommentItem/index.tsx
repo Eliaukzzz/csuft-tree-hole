@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { NavLink } from "react-router-dom";
+import { NavLink, useHistory } from "react-router-dom";
 import {
   CommentProp,
   CommentType,
@@ -19,7 +19,8 @@ export const CommentItem = ({
   comment: CommentProp | ReplyProp;
   commentType?: CommentType; // 留言类型
 }) => {
-  const { likeAndDislike } = useCommentsList();
+  const history = useHistory();
+  const { likeAndDislike, removeComment } = useCommentsList();
   const { currentUser } = useUser();
   // 留言类型
   const [type, setType] = useState<string>("");
@@ -158,13 +159,22 @@ export const CommentItem = ({
       }
     }
   };
-  // todo 删除
+  // 删除
+  const remove = async () => {
+    removeComment(comment._id)
+      .then(() => {
+        history.go(0);
+      })
+      .catch((err) => console.error(err));
+  };
 
   return (
     <div className="mb-2">
       <div className="float-right mb-2 mt-3">
         {itemDetail.posterInfo._id === currentUser._id ? (
-          <button className="iconfont text-xl text-red-500">&#xe665;</button>
+          <button onClick={remove} className="iconfont text-xl text-red-500">
+            &#xe665;
+          </button>
         ) : null}
         <button
           onClick={() => {

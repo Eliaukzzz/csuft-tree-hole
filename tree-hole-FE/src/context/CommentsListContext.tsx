@@ -41,6 +41,7 @@ const CommentsListContext = React.createContext<
       getCommentsList: (type: CommentType) => Promise<CommentProp[]>;
       getCurrentUserCommentsList: () => Promise<CommentProp[]>;
       getFavoriteCommentsList: () => Promise<CommentProp[]>;
+      removeComment: (commentId: string) => Promise<string>;
       likeAndDislike: (
         comment_id: string,
         user_id: string,
@@ -189,6 +190,29 @@ export const CommentListProvider = ({ children }: { children: ReactNode }) => {
       }
     });
   };
+  // 删除树洞留言
+  const removeComment = async (commentId: string) => {
+    setIsLoading(true);
+    const token = localStorage.getItem("__CSUFTTreeHoleToken__");
+    if (!token) return Promise.reject("本地没有token");
+    const response = await fetch("/api/comment/remove", {
+      method: "PATCH",
+      headers: {
+        // 类型为json
+        "Content-Type": "application/json",
+        // 如果有token 携带token
+        Authorization: token,
+      },
+      body: JSON.stringify({ comment_id: commentId }),
+    });
+    if (response.ok) {
+      setIsLoading(false);
+      return Promise.resolve("成功删除留言");
+    } else {
+      setIsLoading(true);
+      return Promise.reject("删除留言出错 请再试一次");
+    }
+  };
   // 点赞点踩
   const likeAndDislike = (
     comment_id: string,
@@ -199,7 +223,7 @@ export const CommentListProvider = ({ children }: { children: ReactNode }) => {
     if (!token) return Promise.reject("本地没有token");
     setIsLoading(true);
     return fetch(`/api/comment/feel`, {
-      method: "POST",
+      method: "PATCH",
       headers: {
         Authorization: token,
         "Content-Type": "application/json",
@@ -226,6 +250,7 @@ export const CommentListProvider = ({ children }: { children: ReactNode }) => {
     <CommentsListContext.Provider
       children={children}
       value={{
+        removeComment,
         commentsList,
         commentListType,
         getCommentsList,
